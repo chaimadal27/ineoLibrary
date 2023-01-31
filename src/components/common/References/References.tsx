@@ -7,25 +7,22 @@ export const References: React.FC = () => {
     <S.ReferencesWrapper>
       <S.Text>
         Made by{' '}
-        <a href="https://altence.com" target="_blank" rel="noreferrer">
-          Altence{' '}
+        <a href="https://ineo.dev/" target="_blank" rel="noreferrer">
+          ineo{' '}
         </a>
-        in 2022 &copy;. Based on{' '}
-        <a href="https://ant.design/" target="_blank" rel="noreferrer">
-          Ant-design.
-        </a>
+        in {new Date().getFullYear()} &copy;
       </S.Text>
       <S.Icons>
-        <a href="https://github.com/altence/lightence-admin" target="_blank" rel="noreferrer">
+        <a href="#" target="_blank" rel="noreferrer">
           <GithubOutlined />
         </a>
-        <a href="https://twitter.com/altence_team" target="_blank" rel="noreferrer">
+        <a href="#" target="_blank" rel="noreferrer">
           <TwitterOutlined />
         </a>
-        <a href="https://www.facebook.com/groups/altence" target="_blank" rel="noreferrer">
+        <a href="#" target="_blank" rel="noreferrer">
           <FacebookOutlined />
         </a>
-        <a href="https://linkedin.com/company/altence" target="_blank" rel="noreferrer">
+        <a href="#" target="_blank" rel="noreferrer">
           <LinkedinOutlined />
         </a>
       </S.Icons>

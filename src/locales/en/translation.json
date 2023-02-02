@@ -874,9 +874,9 @@
       "viewAll": "View all",
       "filter": "Filter",
       "show": "Show",
-      "bid": "Bid",
+      "bid": "View",
       "trendingCollections": "Trending Collections",
-      "recentlyAddedNFTs": "Recently Added NFTs",
+      "recentlyAddedNFTs": "Recently Added templates",
       "trendingCreators": "Trending Creators"
   }
 }

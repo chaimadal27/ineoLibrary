@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './References.styles';
-import { FacebookOutlined, GithubOutlined, LinkedinOutlined, TwitterOutlined } from '@ant-design/icons';
+import { FacebookOutlined, LinkedinOutlined, TwitterOutlined } from '@ant-design/icons';
 
 export const References: React.FC = () => {
   return (
@@ -13,9 +13,6 @@ export const References: React.FC = () => {
         in {new Date().getFullYear()} &copy;
       </S.Text>
       <S.Icons>
-        <a href="#" target="_blank" rel="noreferrer">
-          <GithubOutlined />
-        </a>
         <a href="#" target="_blank" rel="noreferrer">
           <TwitterOutlined />
         </a>

@@ -5,6 +5,7 @@ import { H6 } from '@app/components/common/typography/H6/H6';
 import { ProfileOverlay } from '../ProfileOverlay/ProfileOverlay';
 import { useAppSelector } from '@app/hooks/reduxHooks';
 import { useResponsive } from '@app/hooks/useResponsive';
+import pic from '@app/assets/images/download.png';
 import * as S from './ProfileDropdown.styles';
 
 export const ProfileDropdown: React.FC = () => {
@@ -16,7 +17,7 @@ export const ProfileDropdown: React.FC = () => {
     <Dropdown overlay={<ProfileOverlay />} trigger={['click']}>
       <S.ProfileDropdownHeader as={Row} gutter={[10, 10]} align="middle">
         <Col>
-          <Avatar src={user.imgUrl} alt="User" shape="circle" size={40} />
+          <Avatar src={pic} alt="User" shape="circle" size={40} />
         </Col>
         {isTablet && (
           <Col>

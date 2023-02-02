@@ -6,23 +6,24 @@ import { useResponsive } from '@app/hooks/useResponsive';
 import { TrendingCreators } from '@app/components/nft-dashboard/trending-creators/TrendingCreators';
 import { RecentlyAddedNft } from '@app/components/nft-dashboard/recently-added/RecentlyAddedNft';
 import { TrendingCollections } from '@app/components/nft-dashboard/trending-collections/TrendingCollections';
-import { Balance } from '@app/components/nft-dashboard/Balance/Balance';
-import { TotalEarning } from '@app/components/nft-dashboard/totalEarning/TotalEarning';
 import { ActivityStory } from '@app/components/nft-dashboard/activityStory/ActivityStory';
 import { RecentActivity } from '@app/components/nft-dashboard/recentActivity/RecentActivity';
 import * as S from './DashboardPage.styles';
+// import { Balance } from '@app/components/nft-dashboard/Balance/Balance';
+// import { TotalEarning } from '@app/components/nft-dashboard/totalEarning/TotalEarning';
 
 const MedicalDashboardPage: React.FC = () => {
   const { isDesktop } = useResponsive();
 
   const desktopLayout = (
     <Row>
-      <S.LeftSideCol xl={16} xxl={17} id="desktop-content">
+      <S.LeftSideCol xl={18} xxl={10} id="desktop-content">
         <Row gutter={[60, 60]}>
+          {/*
           <Col span={24}>
             <TrendingCreators />
           </Col>
-
+          */}
           <Col span={24}>
             <RecentlyAddedNft />
           </Col>
@@ -38,14 +39,10 @@ const MedicalDashboardPage: React.FC = () => {
         <References />
       </S.LeftSideCol>
 
-      <S.RightSideCol xl={8} xxl={7}>
-        <div id="balance">
-          <Balance />
-        </div>
+      <S.RightSideCol xl={6} xxl={7}>
+        <div id="balance">{/*<Balance />*/}</div>
         <S.Space />
-        <div id="total-earning">
-          <TotalEarning />
-        </div>
+        <div id="total-earning">{/*<TotalEarning />*/}</div>
         <S.Space />
         <S.ScrollWrapper id="activity-story">
           <ActivityStory />
@@ -76,7 +73,7 @@ const MedicalDashboardPage: React.FC = () => {
 
   return (
     <>
-      <PageTitle>NFT Dashboard</PageTitle>
+      <PageTitle>Dashboard</PageTitle>
       {isDesktop ? desktopLayout : mobileAndTabletLayout}
     </>
   );

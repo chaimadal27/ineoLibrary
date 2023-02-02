@@ -1,4 +1,5 @@
 import { ActivityStatusType } from '@app/interfaces/interfaces';
+import pic from '@app/assets/images/download.png';
 
 export interface Activity {
   image: string;
@@ -25,28 +26,28 @@ export const getUserActivities = (): Promise<UserActivity[]> => {
     setTimeout(() => {
       res([
         {
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_t1PQ4fYJu7M_ueosw4.webp',
+          image: pic,
           title: 'Cubic#1',
           status: 'sold',
           date: Date.now() - 1000 * 60 * 60 * 24 * 5,
           usd_value: 240,
         },
         {
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_1rBg5YSi00c_ctycjc.webp',
+          image: pic,
           title: 'Ancient Nature',
           status: 'added',
           date: Date.now() - 1000 * 60 * 60 * 24 * 22,
           usd_value: 1360,
         },
         {
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_t55GeRpETn0_s8myd3.webp',
+          image: pic,
           title: 'Art of Mind',
           status: 'booked',
           date: Date.now() - 1000 * 60 * 60 * 24 * 156,
           usd_value: 1895,
         },
         {
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_geJHvrH-CgA_n6mmkv.webp',
+          image: pic,
           title: 'CryptoBox',
           status: 'sold',
           date: Date.now() - 1000 * 60 * 60 * 24 * 31,
@@ -101,41 +102,36 @@ export const getTrendingActivities = (): Promise<TrendingActivity[]> => {
         {
           title: 'TownYTraveler',
           owner: '@akura',
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_yhIsPgLfVNU_1_hdauhp.webp',
-          avatar: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_tmRuRPBiPcA_dlpsh0.webp',
+          image: pic,
+          avatar: pic,
           usd_value: 1045,
         },
         {
           title: 'TownYTraveler',
           owner: '@akura',
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_eHUMDkv4q1w_xchurr.webp',
-          avatar: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_Tgq8oggf0EY_mwyjub.webp',
+          image: pic,
+          avatar: pic,
           usd_value: 1045,
         },
         {
           title: 'TownYTraveler',
           owner: '@akura',
-          image: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_6JQn1G0lMgY_zqqd7q.webp',
-          avatar: process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/unsplash_nR-rzu8--5M_qwhnht.webp',
+          image: pic,
+          avatar: pic,
           usd_value: 1045,
         },
         {
           title: 'TownYTraveler',
           owner: '@akura',
-          image:
-            process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/milad-fakurian-bMSA5-tLFao-unsplash_js8utz.webp',
-          avatar:
-            process.env.REACT_APP_ASSETS_BUCKET +
-            '/lightence-activity/salvatore-andrea-santacroce-wGICoyAhEs4-unsplash_dfo8do.webp',
+          image: pic,
+          avatar: pic,
           usd_value: 1045,
         },
         {
           title: 'TownYTraveler',
           owner: '@akura',
-          image:
-            process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/javier-miranda-xB2XP29gn10-unsplash_klwx4d.webp',
-          avatar:
-            process.env.REACT_APP_ASSETS_BUCKET + '/lightence-activity/simon-lee-hbFKxsIqclc-unsplash_vcv07z.webp',
+          image: pic,
+          avatar: pic,
           usd_value: 1045,
         },
       ]);

@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import jwt_decode from "jwt-decode";
+
 import {
   ResetPasswordRequest,
   login,
@@ -12,28 +14,38 @@ import {
   setNewPassword,
 } from '@app/api/auth.api';
 import { setUser } from '@app/store/slices/userSlice';
-import { deleteToken, deleteUser, persistToken, readToken } from '@app/services/localStorage.service';
+import { deleteToken, deleteUser, persistToken, readToken, testUser } from '@app/services/localStorage.service';
+import { UserModel } from '@app/domain/UserModel';
 
 export interface AuthSlice {
-  token: string | null;
+  // ress: string | null;
+  refresh: string | null;
+  access: string | null;
 }
 
 const initialState: AuthSlice = {
-  token: readToken(),
+  access: readToken(),
+  refresh: readToken()
 };
 
+
 export const doLogin = createAsyncThunk('auth/doLogin', async (loginPayload: LoginRequest, { dispatch }) =>
-  login(loginPayload).then((res) => {
-    dispatch(setUser(res.user));
-    persistToken(res.token);
-
-    return res.token;
-  }),
+  login(loginPayload).then((res)=>{
+    console.log('access token', res.access)
+    const decoded:UserModel = jwt_decode(JSON.stringify(res.access))
+    const {user_id, email, first_name, last_name} = decoded
+    console.log('email and id', user_id, email)
+    persistToken(JSON.stringify(res.access));    
+    dispatch(setUser({user_id, email, first_name, last_name}));
+    console.log('sar appel')
+  return JSON.stringify(res.access);
+  })
 );
+ 
 
-export const doSignUp = createAsyncThunk('auth/doSignUp', async (signUpPayload: SignUpRequest) =>
-  signUp(signUpPayload),
-);
+export const doSignUp = createAsyncThunk('auth/doSignUp', async (signUpPayload: SignUpRequest) =>{
+   signUp(signUpPayload) 
+});
 
 export const doResetPassword = createAsyncThunk(
   'auth/doResetPassword',
@@ -52,7 +64,7 @@ export const doSetNewPassword = createAsyncThunk('auth/doSetNewPassword', async 
 export const doLogout = createAsyncThunk('auth/doLogout', (payload, { dispatch }) => {
   deleteToken();
   deleteUser();
-  dispatch(setUser(null));
+  dispatch(setUser({}));
 });
 
 const authSlice = createSlice({
@@ -61,10 +73,10 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(doLogin.fulfilled, (state, action) => {
-      state.token = action.payload;
+      state.access = action.payload;
     });
     builder.addCase(doLogout.fulfilled, (state) => {
-      state.token = '';
+      state.access = '';
     });
   },
 });

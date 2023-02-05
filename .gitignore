@@ -64,6 +64,7 @@ media
 
 # Distribution / packaging
 .Python
+./server/venv/
 ./server/build/
 ./server/develop-eggs/
 ./server/dist/

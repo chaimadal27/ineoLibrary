@@ -10679,6 +10679,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jwt-decode@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "jwt-decode@npm:3.1.2"
+  checksum: 20a4b072d44ce3479f42d0d2c8d3dabeb353081ba4982e40b83a779f2459a70be26441be6c160bfc8c3c6eadf9f6380a036fbb06ac5406b5674e35d8c4205eeb
+  languageName: node
+  linkType: hard
+
 "killable@npm:^1.0.1":
   version: 1.0.1
   resolution: "killable@npm:1.0.1"
@@ -10900,6 +10907,7 @@ __metadata:
     google-map-react: ^2.1.10
     husky: ^6.0.0
     i18next: ^20.4.0
+    jwt-decode: ^3.1.2
     leaflet: ^1.7.1
     less: ^4.1.2
     less-plugin-clean-css: ^1.5.1

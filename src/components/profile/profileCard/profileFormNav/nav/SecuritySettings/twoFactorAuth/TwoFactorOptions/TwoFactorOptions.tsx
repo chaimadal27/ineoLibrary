@@ -15,6 +15,8 @@ interface TwoFactorOptionsProps {
 export const TwoFactorOptions: React.FC<TwoFactorOptionsProps> = ({ selectedOption, setSelectedOption }) => {
   const user = useAppSelector((state) => state.user.user);
 
+  console.log(user)
+
   const { isEmailActive, isPhoneActive } = useMemo(
     () => ({
       isPhoneActive: selectedOption === 'phone',

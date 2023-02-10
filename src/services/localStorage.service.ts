@@ -21,7 +21,7 @@ export const persistToken = (token: string): void => {
 
 export const readToken = (): string => {
   const cookieMatch = document.cookie.match(/access=([^;]+)/);
-  return cookieMatch ? cookieMatch[1] : '';
+  return cookieMatch ? cookieMatch[1].replace(/['"]/g, "") : '';
 };
 
 // export const persistUser = (user: UserModel): void => {

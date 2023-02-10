@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 import {
   ResetPasswordRequest,
@@ -31,13 +31,10 @@ const initialState: AuthSlice = {
 
 export const doLogin = createAsyncThunk('auth/doLogin', async (loginPayload: LoginRequest, { dispatch }) =>
   login(loginPayload).then((res)=>{
-    console.log('access token', res.access)
     const decoded:UserModel = jwt_decode(JSON.stringify(res.access))
     const {user_id, email, first_name, last_name} = decoded
-    console.log('email and id', user_id, email)
     persistToken(JSON.stringify(res.access));    
     dispatch(setUser({user_id, email, first_name, last_name}));
-    console.log('sar appel')
   return JSON.stringify(res.access);
   })
 );

@@ -9,38 +9,53 @@ import { NftCard } from '@app/components/nft-dashboard/recently-added/nft-card/N
 import { getRecentlyAddedNfts, NftItem } from '@app/api/nftDashboard.api';
 import { useResponsive } from '@app/hooks/useResponsive';
 import * as S from './RecentlyAddedNft.styles';
+import { fetchWorkshops } from '@app/store/slices/workshopSlice'
+import { useAppDispatch, useAppSelector } from '@app/hooks/reduxHooks';
+import { WorkshopModel } from '@app/domain/WorkshopModel';
 
-export const RecentlyAddedNft: React.FC = () => {
-  const [nfts, setNfts] = useState<NftItem[]>([]);
+const RecentlyAddedNft: React.FC = () => {
+  
 
+  // const workshops = useAppSelector((state)=>state.workshop.workshop)
+  
   const { t } = useTranslation();
   const { mobileOnly, isTablet } = useResponsive();
+  const dispatch = useAppDispatch()
+  
+  const workshops:WorkshopModel[] = useAppSelector((state)=>state.workshop.workshop)
+
 
   useEffect(() => {
-    getRecentlyAddedNfts().then((result) => {
-      setNfts(result);
-    });
+    dispatch(fetchWorkshops())
+    
+    console.log('mlqskdqmlskd')
+    
+    
+    
+    // getRecentlyAddedNfts().then((result) => {
+    //   setWorkshops(result);
+    // });
   }, []);
 
-  const cards = useMemo(() => {
+  const cards = useMemo(()=>{
     return {
-      mobile: nfts.slice(0, 3).map((nft) => <NftCard key={nft.title} nftItem={nft} />),
-      tablet: nfts.map((nft) => (
-        <div key={nft.title}>
-          <S.CardWrapper>
-            <NftCard nftItem={nft} />
-          </S.CardWrapper>
-        </div>
-      )),
-    };
-  }, [nfts]);
+      mobile: workshops.map((workshop)=> <NftCard key={workshop.id} workshop={workshop} />),
+      tablet: workshops.map((workshop)=> <div key={workshop.id}><S.CardWrapper><NftCard key={workshop.id} workshop={workshop} /></S.CardWrapper></div>)
+    }
+  },[workshops, t, mobileOnly, isTablet, useAppSelector])
+
+
+
+
+
+
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sliderRef = useRef<any>();
 
   return (
     <>
-      <NFTCardHeader title={t('nft.recentlyAddedNFTs')}>
+    <NFTCardHeader title={t('nft.recentlyAddedNFTs')}>
         {isTablet && (
           <Row align="middle">
             <Col>
@@ -63,24 +78,24 @@ export const RecentlyAddedNft: React.FC = () => {
       </NFTCardHeader>
 
       <S.SectionWrapper>
-        {mobileOnly && cards.mobile}
+        {/* {mobileOnly && cards.mobile} */}
 
-        {isTablet && nfts.length > 0 && (
+        {/* {isTablet && workshops.length > 0 && ( */}
           <Carousel
-            ref={sliderRef}
+            // ref={sliderRef}
             slidesToShow={3}
             responsive={[
               {
                 breakpoint: 1900,
                 settings: {
-                  slidesToShow: 2,
+                  slidesToShow: 3,
                 },
               },
             ]}
           >
-            {cards.tablet}
+         {cards.tablet}
           </Carousel>
-        )}
+        {/* // )} */}
       </S.SectionWrapper>
 
       {mobileOnly && (
@@ -91,3 +106,4 @@ export const RecentlyAddedNft: React.FC = () => {
     </>
   );
 };
+export default React.memo(RecentlyAddedNft);

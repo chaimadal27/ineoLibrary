@@ -8,10 +8,7 @@ class ListCreateUserAPI(generics.ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+
 class RetrieveUpdateDestoryUserAPI(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-
-# class SignUpAPI(generics.CreateAPIView):
-#     def post(self, request, *args, **kwargs):
-#         return super().post(request, *args, **kwargs)

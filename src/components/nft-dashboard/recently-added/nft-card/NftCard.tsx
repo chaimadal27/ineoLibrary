@@ -1,58 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useResponsive } from '@app/hooks/useResponsive';
 import { NftItem } from '@app/api/nftDashboard.api';
 import { formatNumberWithCommas, getCurrencyPrice } from '@app/utils/utils';
 import * as S from './NftCard.styles';
+import { WorkshopModel } from '@app/domain/WorkshopModel';
 
-interface NftCardProps {
-  nftItem: NftItem;
+// interface NftCardProps {
+//   workshop: NftItem;
+// }
+
+interface Workshops {
+  workshop: WorkshopModel
 }
 
-export const NftCard: React.FC<NftCardProps> = ({ nftItem }) => {
+export const NftCard: React.FC<Workshops> = ({ workshop }) => {
   const { isTablet } = useResponsive();
+  const {workshop_title } = workshop
+
 
   const tabletLayout = (
     <>
       <S.InfoHeader>
-        <S.InfoText>@{nftItem.author}</S.InfoText>
+        <S.InfoText>@{workshop_title}</S.InfoText>
       </S.InfoHeader>
 
-      <S.InfoFooter>
+      {/* <S.InfoFooter>
         <S.CurrentBidWrapper>
           <S.CurrentBid>Current Bid</S.CurrentBid>
-          <S.BidCrypto>{getCurrencyPrice(formatNumberWithCommas(nftItem.currentBidCrypto), 'ETH', false)}</S.BidCrypto>
+          <S.BidCrypto>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBidCrypto), 'ETH', false)}</S.BidCrypto>
         </S.CurrentBidWrapper>
 
         <S.CurrentBidWrapper>
-          <S.Bid>{getCurrencyPrice(formatNumberWithCommas(nftItem.currentBid), 'USD')}</S.Bid>
+          <S.Bid>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBid), 'USD')}</S.Bid>
         </S.CurrentBidWrapper>
-      </S.InfoFooter>
+      </S.InfoFooter> */}
     </>
   );
 
   const mobileLayout = (
     <>
       <S.InfoRow>
-        <S.InfoText>@{nftItem.author}</S.InfoText>
-        <S.BidCrypto>{getCurrencyPrice(formatNumberWithCommas(nftItem.currentBidCrypto), 'ETH', false)}</S.BidCrypto>
+        <S.InfoText>@{workshop_title}</S.InfoText>
+        {/* <S.BidCrypto>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBidCrypto), 'ETH', false)}</S.BidCrypto> */}
       </S.InfoRow>
 
-      <S.InfoRow>
+      {/* <S.InfoRow>
         <S.CurrentBid>Current Bid</S.CurrentBid>
-        <S.Bid>{getCurrencyPrice(formatNumberWithCommas(nftItem.currentBid), 'USD')}</S.Bid>
-      </S.InfoRow>
+        <S.Bid>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBid), 'USD')}</S.Bid>
+      </S.InfoRow> */}
     </>
   );
 
   return (
-    <S.Card padding={0} $img={nftItem.image}>
-      <S.NftImage src={nftItem.image} alt="nftImage" />
+    <S.Card>
+      {/* <S.NftImage src={workshop.image} alt="nftImage" /> */}
       <S.NftInfo>
         <S.InfoRow>
-          <S.Title>{nftItem.title}</S.Title>
+          <S.Title>{workshop_title}</S.Title>
         </S.InfoRow>
         {isTablet ? tabletLayout : mobileLayout}
       </S.NftInfo>
     </S.Card>
   );
 };
+//  padding={0} $img={workshop.image}

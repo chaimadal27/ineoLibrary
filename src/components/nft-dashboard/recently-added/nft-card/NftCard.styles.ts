@@ -115,12 +115,12 @@ export const Bid = styled(CurrentBid)`
   }
 `;
 
-export const Card = styled(NFTCard)<CardInternalProps>`
+export const Card = styled(NFTCard)`
   overflow: hidden;
 
   &:hover {
     & {
-      background: ${(props) => `url(${props.$img})`};
+
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;

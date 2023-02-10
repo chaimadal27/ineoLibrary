@@ -44,7 +44,7 @@ git commit -am "."
 git fetch 
 git merge origin/main --no-edit 
 ``` 
- 4.Upload changes to the repository
+ 4. Upload changes to the repository
 ``` 
 git status 
 git add . 

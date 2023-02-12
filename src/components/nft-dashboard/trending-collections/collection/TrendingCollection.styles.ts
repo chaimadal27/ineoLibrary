@@ -49,6 +49,25 @@ export const Text = styled(Typography.Text)`
   font-weight: ${FONT_WEIGHT.semibold};
 `;
 
+export const InfoText = styled.span`
+  display: block;
+  transition: all 0.5s ease;
+  letter-spacing: 0.02em;
+
+  font-weight: ${FONT_WEIGHT.regular};
+
+  font-size: ${FONT_SIZE.xxs};
+
+  font-family: ${FONT_FAMILY.secondary};
+
+  color: var(--text-nft-light-color);
+
+  @media only screen and ${media.xl} {
+    font-size: ${FONT_SIZE.xs};
+  }
+`;
+
+
 export const OwnerText = styled(Text)`
   letter-spacing: 0.02em;
 
@@ -99,35 +118,39 @@ export const BidButton = styled(Button)`
 export const Card = styled(NFTCard)<CardInternalProps>`
   overflow: hidden;
 
-  &:hover {
-    & {
-      background: ${(props) => `url(${props.$img})`};
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    ${CollectionImage} {
-      animation: imgIn 0.5s;
-      animation-fill-mode: forwards;
-    }
-
-    ${Title}, ${Text}, ${USDText} {
-      color: var(--text-secondary-color);
-    }
-
-    ${AuthorAvatarWrapper} {
-      transform: translateY(-70px) scale(1.1);
-    }
-
-    ${BidButton} {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1.1);
-      position: absolute;
-    }
+  :hover {
+    transform: scale(1.1);
+    cursor: pointer;
   }
+  // &:hover {
+  //   & {
+  //     background: ${(props) => `url(${props.$img})`};
+  //     background-repeat: no-repeat;
+  //     background-size: cover;
+  //     background-position: center;
+  //     position: relative;
+  //   }
+
+  //   ${CollectionImage} {
+  //     animation: imgIn 0.5s;
+  //     animation-fill-mode: forwards;
+  //   }
+
+  //   ${Title}, ${Text}, ${USDText} {
+  //     color: var(--text-secondary-color);
+  //   }
+
+  //   ${AuthorAvatarWrapper} {
+  //     transform: translateY(-70px) scale(1.1);
+  //   }
+
+  //   ${BidButton} {
+  //     top: 50%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%) scale(1.1);
+  //     position: absolute;
+  //   }
+  // }
 
   @keyframes imgIn {
     99% {

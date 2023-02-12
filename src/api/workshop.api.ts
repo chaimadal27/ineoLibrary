@@ -6,7 +6,7 @@ import { WorkshopModel } from '@app/domain/WorkshopModel'
 
 
 export interface WorkshopsData {
-workshop:WorkshopModel[]
+workshop:WorkshopModel[] | undefined
 }
 
 
@@ -19,4 +19,8 @@ export const getWorkshops= async ():Promise<WorkshopsData> => {
         throw new Error(e);
     }
 } 
-  
+
+export const addWorkshop =  async():Promise<WorkshopsData> => {
+    const dd:WorkshopsData | any = []
+    return dd
+}

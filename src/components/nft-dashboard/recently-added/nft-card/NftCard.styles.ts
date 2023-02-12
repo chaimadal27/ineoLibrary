@@ -115,38 +115,15 @@ export const Bid = styled(CurrentBid)`
   }
 `;
 
-export const Card = styled(NFTCard)`
+export const Card = styled(NFTCard)<CardInternalProps>`
   overflow: hidden;
 
-  &:hover {
-    & {
-
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    ${NftImage} {
-      animation: imgIn 0.5s;
-      animation-fill-mode: forwards;
-    }
-
-    ${Title} {
-      animation: titleIn 0.5s ease;
-      animation-fill-mode: forwards;
-
-      color: var(--text-secondary-color);
-    }
-
-    ${InfoText} {
-      color: var(--text-secondary-color);
-    }
-
-    ${BidCrypto} {
-      color: var(--text-secondary-color);
-    }
+  :hover {
+    transform: scale(1.1);
+    cursor: pointer;
   }
+
+ 
 
   @keyframes imgIn {
     99% {

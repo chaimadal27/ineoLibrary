@@ -6,17 +6,14 @@ import { Carousel } from '@app/components/common/Carousel/Carousel';
 import { NFTCardHeader } from '@app/components/nft-dashboard/common/NFTCardHeader/NFTCardHeader';
 import { ViewAll } from '@app/components/nft-dashboard/common/ViewAll/ViewAll';
 import { NftCard } from '@app/components/nft-dashboard/recently-added/nft-card/NftCard';
-import { getRecentlyAddedNfts, NftItem } from '@app/api/nftDashboard.api';
 import { useResponsive } from '@app/hooks/useResponsive';
 import * as S from './RecentlyAddedNft.styles';
 import { fetchWorkshops } from '@app/store/slices/workshopSlice'
 import { useAppDispatch, useAppSelector } from '@app/hooks/reduxHooks';
 import { WorkshopModel } from '@app/domain/WorkshopModel';
 
-const RecentlyAddedNft: React.FC = () => {
+export const RecentlyAddedNft: React.FC = () => {
   
-
-  // const workshops = useAppSelector((state)=>state.workshop.workshop)
   
   const { t } = useTranslation();
   const { mobileOnly, isTablet } = useResponsive();
@@ -27,14 +24,6 @@ const RecentlyAddedNft: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchWorkshops())
-    
-    console.log('mlqskdqmlskd')
-    
-    
-    
-    // getRecentlyAddedNfts().then((result) => {
-    //   setWorkshops(result);
-    // });
   }, []);
 
   const cards = useMemo(()=>{
@@ -43,11 +32,6 @@ const RecentlyAddedNft: React.FC = () => {
       tablet: workshops.map((workshop)=> <div key={workshop.id}><S.CardWrapper><NftCard key={workshop.id} workshop={workshop} /></S.CardWrapper></div>)
     }
   },[workshops, t, mobileOnly, isTablet, useAppSelector])
-
-
-
-
-
 
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -106,4 +90,3 @@ const RecentlyAddedNft: React.FC = () => {
     </>
   );
 };
-export default React.memo(RecentlyAddedNft);

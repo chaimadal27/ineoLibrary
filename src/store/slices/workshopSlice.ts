@@ -1,7 +1,8 @@
-import { createAction, createAsyncThunk, createSlice, PrepareAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
     getWorkshops,
-    WorkshopsData
+    WorkshopsData,
+    addWorkshop
 } from '@app/api/workshop.api'
 
 
@@ -15,7 +16,9 @@ export const fetchWorkshops = createAsyncThunk('get_workshops', async(payload, {
    return getWorkshops()
 })
 
-
+export const createWorkshop = createAsyncThunk('create_workshop', async(payload,{dispatch})=>{
+    return addWorkshop()
+})
 
 
 
@@ -27,6 +30,10 @@ export const workshopSlice = createSlice({
         builder.addCase(fetchWorkshops.fulfilled, (state, action)=>{
             state.workshop = action.payload
             
+        })
+
+        builder.addCase(createWorkshop.fulfilled,(state, payload)=>{
+
         })
     }
 })

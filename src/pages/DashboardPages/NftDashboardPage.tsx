@@ -4,7 +4,7 @@ import { PageTitle } from '@app/components/common/PageTitle/PageTitle';
 import { References } from '@app/components/common/References/References';
 import { useResponsive } from '@app/hooks/useResponsive';
 import { TrendingCreators } from '@app/components/nft-dashboard/trending-creators/TrendingCreators';
-import  RecentlyAddedNft  from '@app/components/nft-dashboard/recently-added/RecentlyAddedNft';
+import  {RecentlyAddedNft}  from '@app/components/nft-dashboard/recently-added/RecentlyAddedNft';
 import { TrendingCollections } from '@app/components/nft-dashboard/trending-collections/TrendingCollections';
 import { ActivityStory } from '@app/components/nft-dashboard/activityStory/ActivityStory';
 import { RecentActivity } from '@app/components/nft-dashboard/recentActivity/RecentActivity';
@@ -35,9 +35,9 @@ const MedicalDashboardPage: React.FC = () => {
             <TrendingCollections />
           </Col>
 
-          <Col span={24}>
+          {/* <Col span={24}>
             <RecentActivity />
-          </Col>
+          </Col> */}
         </Row>
         <References />
       </S.LeftSideCol>

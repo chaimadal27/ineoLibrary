@@ -8,32 +8,35 @@ import { ViewAll } from '@app/components/nft-dashboard/common/ViewAll/ViewAll';
 import { NFTCardHeader } from '@app/components/nft-dashboard/common/NFTCardHeader/NFTCardHeader';
 import { TrendingCollection } from '@app/components/nft-dashboard/trending-collections/collection/TrendingCollection';
 import { useResponsive } from '@app/hooks/useResponsive';
-import { getTrendingActivities, TrendingActivity } from '@app/api/activity.api';
+//import { getTrendingActivities, TrendingActivity } from '@app/api/activity.api';
 import * as S from './TrendingCollections.styles';
+import { WorkshopModel } from '@app/domain/WorkshopModel';
+import { useAppSelector } from '@app/hooks/reduxHooks';
 
 export const TrendingCollections: React.FC = () => {
-  const [trending, setTrending] = useState<TrendingActivity[]>([]);
+  // const [trending, setTrending] = useState<WorkshopModel[]>([]);
+
+  const workshops: WorkshopModel[] = useAppSelector((state)=>state.workshop.workshop)
 
   const { mobileOnly, isTablet: isTabletOrHigher } = useResponsive();
 
-  useEffect(() => {
-    getTrendingActivities().then((res) => setTrending(res));
-  }, []);
 
+ 
   const { t } = useTranslation();
 
-  const trendingList = useMemo(() => {
+
+  const trendingList = useMemo(()=>{
     return {
-      mobile: trending.map((item, index) => <TrendingCollection key={index} {...item} />).slice(0, 3),
-      tablet: trending.map((item, index) => (
-        <div key={index}>
+      mobile: workshops.map((item)=>{return (<TrendingCollection key={item.id} {...item} />)}),
+      tablet: workshops.map((item)=>{return (
+        <div key={item.id}>
           <S.CardWrapper>
-            <TrendingCollection {...item} />
+            <TrendingCollection key={item.id} {...item} />
           </S.CardWrapper>
         </div>
-      )),
-    };
-  }, [trending]);
+      )})
+    }
+  },[workshops])
 
   const sliderRef = useRef<Slider>(null);
 
@@ -64,7 +67,7 @@ export const TrendingCollections: React.FC = () => {
       <S.SectionWrapper>
         {mobileOnly && trendingList.mobile}
 
-        {isTabletOrHigher && trending.length > 0 && (
+        {isTabletOrHigher && workshops.length > 0 && (
           <Carousel
             ref={sliderRef}
             slidesToShow={3}

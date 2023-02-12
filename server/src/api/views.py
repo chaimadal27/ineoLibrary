@@ -1,8 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework import status
-from rest_framework import permissions, authentication
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework import permissions, authentication, status, parsers
+from rest_framework.decorators import api_view, permission_classes, authentication_classes, parser_classes
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -22,8 +21,11 @@ class CustomTokenSerializer(TokenObtainPairSerializer):
 class CustomTokenAPI(TokenObtainPairView):
     serializer_class = CustomTokenSerializer
 
-@permission_classes([permissions.IsAdminUser, permissions.IsAuthenticated, permissions.IsAuthenticatedOrReadOnly])
+
 @api_view(http_method_names=['GET'])
+@permission_classes([permissions.IsAdminUser, permissions.IsAuthenticated, permissions.IsAuthenticatedOrReadOnly])
+@authentication_classes([authentication.SessionAuthentication, authentication.BasicAuthentication])
+@parser_classes([parsers.FileUploadParser, parsers.FormParser, parsers.MultiPartParser])
 def authenticationRoutes(request):
     routes = [
         '/api/token',
@@ -43,10 +45,10 @@ def get_tokens_for_user(user):
 
 @api_view(http_method_names=['POST'])
 @permission_classes([permissions.AllowAny])
+@parser_classes([parsers.FileUploadParser, parsers.FormParser, parsers.MultiPartParser])
 @authentication_classes([authentication.SessionAuthentication, authentication.BasicAuthentication])
 def signup(request:Request):
     data = request.data
-    print(data)
     user = User.objects.filter(email=data['email']).first()
     if user is None:
         serializer = UserSerializer(data=data)

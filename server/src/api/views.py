@@ -45,7 +45,6 @@ def get_tokens_for_user(user):
 
 @api_view(http_method_names=['POST'])
 @permission_classes([permissions.AllowAny])
-#@parser_classes([parsers.FileUploadParser, parsers.FormParser, parsers.MultiPartParser])
 @authentication_classes([authentication.SessionAuthentication, authentication.BasicAuthentication])
 def signup(request:Request):
     data = request.data

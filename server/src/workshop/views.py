@@ -35,11 +35,11 @@ class RetrieveUpdateDestroyWorkshop(generics.RetrieveUpdateDestroyAPIView):
     #     except:
     #         raise Http404('workshop not found')
 
-    # # def perform_destroy(self, instance):
-    # #     instance.deleted_at = datetime.datetime.now()
-    # #     instance.deleted_by = self.request.user
-    # #     instance.save(deleted_at = datetime.datetime.now())
-    # #     return Response(status=status.HTTP_204_NO_CONTENT)
+    # def perform_destroy(self, instance):
+    #     instance.deleted_at = datetime.datetime.now()
+    #     instance.deleted_by = self.request.user
+    #     instance.save(deleted_at = datetime.datetime.now())
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
     
     def update(self, request, pk):
         workshop = self.get_queryset(pk=pk)

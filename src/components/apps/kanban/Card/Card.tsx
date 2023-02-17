@@ -12,6 +12,7 @@ interface CardProps {
   style: CSSStyleSheet;
   onClick: () => void;
   onDelete: () => void;
+  onEdit: () => void;
   onChange: (card: CardState) => void;
   className: string;
   id: string | number;
@@ -26,18 +27,23 @@ interface CardProps {
 interface EditPopoverProps {
   onDelete: () => void;
   onArchive: () => void;
+  onEdit: () => void;
 }
 
-const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onArchive, ...props }) => {
+const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onEdit, onArchive, ...props }) => {
   const { t } = useTranslation();
 
   return (
-    <S.CardMenu selectable={false} {...props}>
+    <S.CardMenu selectable={true} {...props} >
       <S.MenuItem key="1" onClick={onDelete}>
         {t('common.delete')}
       </S.MenuItem>
 
-      <S.MenuItem key="2" onClick={onArchive}>
+      <S.MenuItem key="2" onClick={onEdit}>
+        Edit
+      </S.MenuItem>
+
+      <S.MenuItem key="3" onClick={onArchive}>
         {t('kanban.archive')}
       </S.MenuItem>
     </S.CardMenu>
@@ -60,8 +66,12 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(true);
+  const [isEditable, setIsEditable] = useState(true);
+  
 
   const onArrowPress = () => {
+     
+ 
     setIsExpanded(!isExpanded);
   };
 
@@ -81,6 +91,10 @@ export const Card: React.FC<CardProps> = ({
     updateCard({ participants });
   };
 
+const onEditCard = () => {
+  setIsEditable(!isEditable);
+};
+
   return (
     <S.CardWrapper data-id={id} onClick={onClick} style={style} className={className}>
       <S.CollapseCard onChange={onArrowPress} bordered={false} defaultActiveKey={['1']}>
@@ -95,7 +109,7 @@ export const Card: React.FC<CardProps> = ({
                   e.stopPropagation();
                 }}
               >
-                {editable ? (
+                {isEditable ? (
                   <S.Input
                     name="title"
                     value={title}
@@ -111,9 +125,15 @@ export const Card: React.FC<CardProps> = ({
               <S.CardRightContent>
                 <Button noStyle type="text" icon={<S.ArrowDownIcon $expanded={isExpanded} />} />
                 <Dropdown
-                  overlay={<EditPopover onDelete={onDeleteCard} onArchive={onDeleteCard} />}
+                  overlay={<div onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                  }}> <EditPopover onDelete={onDeleteCard} onEdit={
+                    onEditCard
+                  } onArchive={onDeleteCard} /> </div>}
                   placement="bottomRight"
                   trigger={['click']}
+                  destroyPopupOnHide={true} 
                 >
                   <Button
                     noStyle
@@ -121,6 +141,7 @@ export const Card: React.FC<CardProps> = ({
                     icon={<MoreOutlined />}
                     onClick={(e) => {
                       e.stopPropagation();
+                      e.preventDefault();
                     }}
                   />
                 </Dropdown>
@@ -129,7 +150,7 @@ export const Card: React.FC<CardProps> = ({
           }
         >
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={description}
                 border

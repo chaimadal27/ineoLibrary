@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useState, useContext} from 'react';
 import { NewCardForm } from '../newCardForm/NewCardForm/NewCardForm';
 import { Card } from '../Card/Card';
 import { LaneHeader } from '../LaneHeader/LaneHeader';
@@ -10,6 +10,7 @@ import * as S from './Kanban.styles';
 import { BORDER_RADIUS } from '@app/styles/themes/constants';
 
 export const Kanban: React.FC = () => {
+  
   return (
     <S.Kanban
       components={{

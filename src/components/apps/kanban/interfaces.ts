@@ -12,8 +12,17 @@ export interface Participant {
 
 export interface CardState {
   id?: number | string;
-  title?: string;
-  description?: string;
+  activity_title?: string;
+  activity_description?:string;
+  activity_method?: string;
+  activity_technique?:string;
+  activity_difficulty?:string;
+  activity_duration?:number;
+  activity_objectives?:string;
+  activity_needs?:string;
+  activity_organization?:string;
+  activity_variations?:string;
+  laneId?: string | number;
   tags?: Tag[];
   participants?: Participant[];
 }

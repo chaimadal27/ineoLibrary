@@ -8,6 +8,7 @@ import { TagDropdown } from '@app/components/apps/kanban/newCardForm/TagDropdown
 import { CardState, Tag as ITag, Participant as IParticipant } from '@app/components/apps/kanban/interfaces';
 import * as S from './Card.styles';
 
+
 interface CardProps {
   style: CSSStyleSheet;
   onClick: () => void;
@@ -26,8 +27,10 @@ interface CardProps {
   activity_needs?:string;
   activity_organization?:string;
   activity_variations?:string;
-  cardDraggable?: boolean;
-  editable?: boolean;
+  cardDraggable?:boolean;
+  tags:ITag[];
+  participants:IParticipant[];
+  editable?:boolean;
 }
 
 interface EditPopoverProps {
@@ -74,6 +77,8 @@ export const Card: React.FC<CardProps> = ({
   activity_organization,
   activity_variations,
   cardDraggable,
+  tags = [],
+  participants = [],
   editable,
 }) => {
   const { t } = useTranslation();
@@ -93,6 +98,10 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const updateTags = (tags: ITag[]) => {
+    updateCard({ tags });
+  };
+
+  const updateMethod = (tags: ITag[]) => {
     updateCard({ tags });
   };
 
@@ -172,7 +181,7 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-          {editable ? (
+          {isEditable ? (
               <S.Input
                 value={activity_method}
                 border
@@ -185,7 +194,7 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={activity_technique}
                 border
@@ -198,20 +207,21 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
-              <S.Input
-                value={activity_difficulty}
-                border
-                placeholder='Difficulty'
-                resize="vertical"
-                onSave={(value: string) => updateCard({activity_difficulty: value})}
-              />
+            {isEditable ? (
+              // <S.Input
+              //   value={activity_difficulty}
+              //   border
+              //   placeholder='Difficulty'
+              //   resize="vertical"
+              //   onSave={(value: string) => updateCard({activity_difficulty: value})}
+              // />
+              <TagDropdown selectedTags={tags} setSelectedTags={updateTags} />
             ) : (
               activity_difficulty
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={activity_duration}
                 border
@@ -224,7 +234,7 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={activity_objectives}
                 border
@@ -237,7 +247,7 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={activity_needs}
                 border
@@ -250,7 +260,7 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={activity_organization}
                 border
@@ -263,7 +273,7 @@ const onEditCard = () => {
             )}
           </S.CardDetails>
           <S.CardDetails>
-            {editable ? (
+            {isEditable ? (
               <S.Input
                 value={activity_variations}
                 border
@@ -275,13 +285,9 @@ const onEditCard = () => {
               activity_variations
             )}
           </S.CardDetails>
-          {/* <S.CardFooter>
-            <TagDropdown selectedTags={tags} setSelectedTags={updateTags} />
-          </S.CardFooter>
-
           <S.ParticipantsWrapper>
             <ParticipantsDropdown selectedParticipants={participants} setSelectedParticipants={updateParticipants} />
-          </S.ParticipantsWrapper> */}
+          </S.ParticipantsWrapper>
         </S.CardContent>
       </S.CollapseCard>
     </S.CardWrapper>

@@ -135,7 +135,7 @@ export const AppRouter: React.FC = () => {
           <Route path={MEDICAL_DASHBOARD_PATH} element={<MedicalDashboard />} />
           <Route path="apps">
             <Route path="feed" element={<NewsFeed />} />
-            <Route path="kanban" element={<Kanban />} />
+            <Route path="session" element={<Kanban />} />
           </Route>
           <Route path="forms">
             <Route path="advanced-forms" element={<AdvancedForm />} />

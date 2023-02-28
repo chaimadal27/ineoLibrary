@@ -9,7 +9,7 @@ interface AddCardLinkProps {
 export const AddCardLink: React.FC<AddCardLinkProps> = ({ onClick }) => {
   
   return ( 
-    <S.AddCardWrapper onClick={onClick}> 
+    <S.AddCardWrapper onMouseMoveCapture={onClick}> 
       <PlusOutlined />
     </S.AddCardWrapper>
   );

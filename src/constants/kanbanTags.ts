@@ -8,7 +8,7 @@ interface KanbanTags {
   [key: string]: Tag;
 }
 
-export const kanbanTags: KanbanTags = {
+export const kanbanDifficulty: KanbanTags = {
   high: {
     id: 'high',
     title: 'high',
@@ -23,15 +23,5 @@ export const kanbanTags: KanbanTags = {
     id: 'low',
     title: 'low',
     bgColor: 'success',
-  },
-  ui: {
-    id: 'ui',
-    title: 'ui',
-    bgColor: 'primary',
-  },
-  dev: {
-    id: 'dev',
-    title: 'dev',
-    bgColor: 'primary',
   },
 };

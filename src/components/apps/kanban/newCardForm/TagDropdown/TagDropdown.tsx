@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from '@app/components/common/Dropdown/Dropdown';
 import { Tag as ITag } from '../../interfaces';
-import { kanbanTags } from 'constants/kanbanTags';
+import { kanbanDifficulty } from 'constants/kanbanTags';
 import * as S from './TagDropdown.styles';
 import { Tag } from 'components/common/Tag/Tag';
 import { PlusCircleFilled } from '@ant-design/icons';
@@ -15,22 +15,22 @@ interface TagDropdownProps {
 export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelectedTags }) => {
   const { t } = useTranslation();
 
-  const kanbanTagData = Object.values(kanbanTags);
+  const kanbanTagData = Object.values(kanbanDifficulty);
   const selectedTagsIds = selectedTags.map((item) => item.id);
 
-  const onTagClick = (tag: ITag) => {
-    const isExist = selectedTagsIds.includes(tag.id);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
-    if (isExist) {
-      setSelectedTags(selectedTags.filter((item) => item.id !== tag.id));
-    } else {
-      setSelectedTags([...selectedTags, tag]);
-    }
+  const onTagClick = (tag: ITag) => {
+    const isSelected = selectedTagsIds.includes(tag.id);
+    const updatedTags = isSelected ? [] : [tag];
+    setSelectedTags(updatedTags);
   };
 
   return (
     <Dropdown
       trigger={['click']}
+      open={dropdownVisible}
+      onVisibleChange={setDropdownVisible}
       overlay={
         <S.EditTagPopover>
           {kanbanTagData.map((tag: ITag) => (
@@ -39,14 +39,14 @@ export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelec
               onClick={(e) => {
                 onTagClick(tag);
                 e.stopPropagation();
-              }}
+              }}                
             >
               <S.PopoverCheckbox checked={selectedTagsIds.includes(tag.id)} />
               <S.TagWrapper backgroundColor={tag.bgColor}>#{tag.title}</S.TagWrapper>
             </S.EditTagPopoverLine>
           ))}
-          <S.RemoveTagWrapper>
-            <S.RemoveTag />
+          <S.RemoveTagWrapper onClick={() => setDropdownVisible(false)} >
+            <S.RemoveTag />   
           </S.RemoveTagWrapper>
         </S.EditTagPopover>
       }
@@ -62,7 +62,7 @@ export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelec
         </S.TagsWrapper>
       ) : (
         <S.TagsWrapper>
-          <S.AddTag>{t('kanban.addTag')}</S.AddTag>
+          <S.AddTag>Select Difficulty </S.AddTag>
         </S.TagsWrapper>
       )}
     </Dropdown>

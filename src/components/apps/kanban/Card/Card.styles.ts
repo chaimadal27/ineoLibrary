@@ -106,5 +106,7 @@ export const MenuItem = styled(Menu.Item)`
 export const Input = styled(InlineInput)`
   && {
     max-height: 28.125rem;
+    background: transparent;  
+    border: none;
   }
 `;

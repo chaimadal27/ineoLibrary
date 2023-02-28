@@ -1,7 +1,7 @@
-import { kanbanTags } from './kanbanTags';
+import { kanbanDifficulty } from './kanbanTags';
 import { kanbanPeople } from './kanbanPeople';
 
-const { high, medium, low, ui, dev } = kanbanTags;
+const { high, medium, low } = kanbanDifficulty;
 const { anna, pavel } = kanbanPeople;
 
 export const kanbanData = {

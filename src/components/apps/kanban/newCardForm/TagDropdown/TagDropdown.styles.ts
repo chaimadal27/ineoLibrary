@@ -85,6 +85,5 @@ export const TagPlusWrapper = styled.span`
 export const AddTag = styled.span`
   font-size: ${FONT_SIZE.xs};
   line-height: 1.25rem;
-  text-decoration: underline;
   color: var(--text-light-color);
 `;

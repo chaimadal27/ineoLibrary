@@ -131,7 +131,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
     if (name === 'activity_difficulty') {
       return (
         <>
-        <BaseButtonsForm.Item
+        {/* <BaseButtonsForm.Item
                  name='activity_difficulty'
                  label='Difficulty'
                  hasFeedback
@@ -142,7 +142,8 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                     <Option value="Intermidiate">Intermidiate</Option>
                     <Option value="Hard">Hard</Option>
                   </Select>
-              </BaseButtonsForm.Item>
+              </BaseButtonsForm.Item> */}
+               <TagDropdown selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
         </>
       )
     }
@@ -200,7 +201,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
     )
   })
   return (
-    <s.AddCardWrapper onMouseOver={()=>{
+    <s.AddCardWrapper onClick={()=>{
       setIsModalOpen(true)
     }}>
      
@@ -248,7 +249,6 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
               onFinish={onFinish}
             >
               {formItems}
-              <TagDropdown selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
               <ParticipantsDropdown
                 selectedParticipants={selectedParticipants}
                 setSelectedParticipants={setSelectedParticipants}
@@ -256,6 +256,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
           </BaseButtonsForm>
           }
         </Modal>
+        <PlusOutlined />
   </s.AddCardWrapper>
   )
 };

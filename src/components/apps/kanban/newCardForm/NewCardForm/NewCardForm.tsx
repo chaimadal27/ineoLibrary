@@ -17,7 +17,6 @@ import { PlusOutlined } from '@ant-design/icons';
 import * as s from '../../AddCardLink/AddCardLink.styles';
 import { AddCardLink } from '../../AddCardLink/AddCardLink';
 
-
 const formInputs = [
   {
     title: 'kanban.title',
@@ -106,8 +105,6 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
     }, 1000);
   };
   
-    
-
   const formItems = formInputs.map((item, index) => {
     const {label, name} = item
     if (name === 'activity_method') {

@@ -215,9 +215,9 @@ const onEditCard = () => {
               //   resize="vertical"
               //   onSave={(value: string) => updateCard({activity_difficulty: value})}
               // />
-              <TagDropdown selectedTags={tags} setSelectedTags={updateTags} />
+              <TagDropdown selectedTags={tags} setSelectedTags={updateTags}  />
             ) : (
-              activity_difficulty
+              <TagDropdown selectedTags={tags} />
             )}
           </S.CardDetails>
           <S.CardDetails>

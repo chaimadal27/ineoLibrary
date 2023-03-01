@@ -157,7 +157,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                     />
                   </BaseButtonsForm.Item>
                 </label>
-              </BaseButtonsForm.Item>
+          </BaseButtonsForm.Item>
         </>
       )
     }
@@ -181,8 +181,8 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                     <Option value="Storytelling, drawing">Storytelling, drawing</Option>
                     <Option value="Hands-on, Application">Hands-on, Application</Option>
                   </Select>
-              </BaseButtonsForm.Item>
-        </>
+            </BaseButtonsForm.Item>
+         </>
       )
     }
     return (

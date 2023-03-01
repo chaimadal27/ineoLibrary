@@ -8,7 +8,7 @@ import { Tag } from 'components/common/Tag/Tag';
 import { PlusCircleFilled } from '@ant-design/icons';
 
 interface TagDropdownProps {
-  selectedTags: ITag[]| [];
+  selectedTags: ITag[];
   setSelectedTags?: (state: ITag[]) => void;
 }
 

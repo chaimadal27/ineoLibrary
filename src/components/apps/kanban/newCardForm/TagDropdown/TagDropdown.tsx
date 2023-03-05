@@ -9,7 +9,7 @@ import { PlusCircleFilled } from '@ant-design/icons';
 
 interface TagDropdownProps {
   selectedTags: ITag[];
-  setSelectedTags: (state: ITag[]) => void;
+  setSelectedTags?: (state: ITag[]) => void;
 }
 
 export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelectedTags }) => {
@@ -23,7 +23,7 @@ export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelec
   const onTagClick = (tag: ITag) => {
     const isSelected = selectedTagsIds.includes(tag.id);
     const updatedTags = isSelected ? [] : [tag];
-    setSelectedTags(updatedTags);
+    setSelectedTags ? setSelectedTags(updatedTags): undefined;
   };
 
   return (

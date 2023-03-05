@@ -66,7 +66,7 @@ export const RecentlyAddedNft: React.FC = () => {
 
         {/* {isTablet && workshops.length > 0 && ( */}
           <Carousel
-            // ref={sliderRef}
+            ref={sliderRef}
             slidesToShow={3}
             responsive={[
               {

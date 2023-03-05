@@ -12,4 +12,7 @@ export const AddCardWrapper = styled.div`
   cursor: pointer;
   font-size: ${FONT_SIZE.xxl};
   color: var(--border-color);
+  .ql-editor {
+    min-height: 60px
+  }
 `;

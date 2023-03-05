@@ -13,7 +13,7 @@ export const References: React.FC = () => {
         in {new Date().getFullYear()} &copy;
       </S.Text>
       <S.Icons>
-        <a href="#" target="_blank" rel="noreferrer">
+        {/* <a href="#" target="_blank" rel="noreferrer">
           <TwitterOutlined />
         </a>
         <a href="#" target="_blank" rel="noreferrer">
@@ -21,7 +21,7 @@ export const References: React.FC = () => {
         </a>
         <a href="#" target="_blank" rel="noreferrer">
           <LinkedinOutlined />
-        </a>
+        </a> */}
       </S.Icons>
     </S.ReferencesWrapper>
   );

@@ -7,7 +7,8 @@ import { ParticipantsDropdown } from '@app/components/apps/kanban/newCardForm/Pa
 import { TagDropdown } from '@app/components/apps/kanban/newCardForm/TagDropdown/TagDropdown';
 import { CardState, Tag as ITag, Participant as IParticipant } from '@app/components/apps/kanban/interfaces';
 import * as S from './Card.styles';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
 
 interface CardProps {
   style: CSSStyleSheet;
@@ -37,9 +38,10 @@ interface EditPopoverProps {
   onDelete: () => void;
   onArchive: () => void;
   onEdit: () => void;
+  onReview: () => void;
 }
 
-const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onEdit, onArchive, ...props }) => {
+const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onEdit, onArchive, onReview, ...props }) => {
   const { t } = useTranslation();
 
   return (
@@ -52,7 +54,11 @@ const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onEdit, onArchive, 
         Edit
       </S.MenuItem>
 
-      <S.MenuItem key="3" onClick={onArchive}>
+      <S.MenuItem key="3" onClick={onReview}>
+        Review
+      </S.MenuItem>
+
+      <S.MenuItem key="4" onClick={onArchive}>
         {t('kanban.archive')}
       </S.MenuItem>
     </S.CardMenu>
@@ -113,6 +119,10 @@ const onEditCard = () => {
   setIsEditable(!isEditable);
 };
 
+const onReviewCard = () => {
+  console.log("hiii");
+};
+
   return (
     <S.CardWrapper data-id={id} onClick={onClick} style={style} className={className}>
       <S.CollapseCard onChange={onArrowPress} bordered={false} defaultActiveKey={['1']}>
@@ -128,16 +138,25 @@ const onEditCard = () => {
                 }}
               >
                 {isEditable ? (
-                  <S.Input
-                    name="title"
-                    value={activity_title}
-                    border
-                    placeholder={t('kanban.title')}
-                    resize="vertical"
-                    onSave={(value: string) => updateCard({ activity_title: value })}
-                  />
+                  // <S.Input
+                  //   name="title"
+                  //   value={activity_title}
+                  //   border
+                  //   placeholder={t('kanban.title')}
+                  //   resize="vertical"
+                  //   onSave={(value: string) => updateCard({ activity_title: value })}
+                  // />
+                  <ReactQuill
+                  theme="bubble"
+                  value={activity_title}
+                  onChange={(value: string) => updateCard({ activity_title: value })}
+                />
                 ) : (
-                  activity_title
+                  <ReactQuill
+                  theme="bubble"
+                  value={activity_title}
+                  readOnly={true}
+                />
                 )}
               </S.CardTitle>
               <S.CardRightContent>
@@ -148,7 +167,7 @@ const onEditCard = () => {
                     e.preventDefault();
                   }}> <EditPopover onDelete={onDeleteCard} onEdit={
                     onEditCard
-                  } onArchive={onDeleteCard} /> </div>}
+                  } onReview={onReviewCard} onArchive={onDeleteCard} /> </div>}
                   placement="bottomRight"
                   trigger={['click']}
                   destroyPopupOnHide={true} 
@@ -169,18 +188,27 @@ const onEditCard = () => {
         >
           <S.CardDetails>
             {isEditable ? (
-              <S.Input
-                value={activity_description}
-                border
-                placeholder={t('kanban.description')}
-                resize="vertical"
-                onSave={(value: string) => updateCard({ activity_description: value })}
-              />
+              // <S.Input
+              //   value={activity_description}
+              //   border
+              //   placeholder={t('kanban.description')}
+              //   resize="vertical"
+              //   onSave={(value: string) => updateCard({ activity_description: value })}
+              // />
+              <ReactQuill
+                 theme="bubble"
+                 value={activity_description}
+                 onChange={(value: string) => updateCard({ activity_description: value}) }
+               />
             ) : (
-              activity_description
+              <ReactQuill
+              theme="bubble"
+              value={activity_description}
+              readOnly={true}
+            />
             )}
           </S.CardDetails>
-          <S.CardDetails>
+          {/* <S.CardDetails>
           {isEditable ? (
               <S.Input
                 value={activity_method}
@@ -192,7 +220,7 @@ const onEditCard = () => {
             ) : (
               activity_method
             )}
-          </S.CardDetails>
+          </S.CardDetails> */}
           <S.CardDetails>
             {isEditable ? (
               <S.Input
@@ -215,9 +243,9 @@ const onEditCard = () => {
               //   resize="vertical"
               //   onSave={(value: string) => updateCard({activity_difficulty: value})}
               // />
-              <TagDropdown selectedTags={tags} setSelectedTags={updateTags} />
+              <TagDropdown selectedTags={tags} setSelectedTags={updateTags}  />
             ) : (
-              activity_difficulty
+              <TagDropdown selectedTags={tags} />
             )}
           </S.CardDetails>
           <S.CardDetails>
@@ -246,7 +274,7 @@ const onEditCard = () => {
               activity_objectives
             )}
           </S.CardDetails>
-          <S.CardDetails>
+          {/* <S.CardDetails>
             {isEditable ? (
               <S.Input
                 value={activity_needs}
@@ -258,8 +286,8 @@ const onEditCard = () => {
             ) : (
               activity_needs
             )}
-          </S.CardDetails>
-          <S.CardDetails>
+          </S.CardDetails> */}
+          {/* <S.CardDetails>
             {isEditable ? (
               <S.Input
                 value={activity_organization}
@@ -271,8 +299,8 @@ const onEditCard = () => {
             ) : (
               activity_organization
             )}
-          </S.CardDetails>
-          <S.CardDetails>
+          </S.CardDetails> */}
+          {/* <S.CardDetails>
             {isEditable ? (
               <S.Input
                 value={activity_variations}
@@ -284,10 +312,10 @@ const onEditCard = () => {
             ) : (
               activity_variations
             )}
-          </S.CardDetails>
-          <S.ParticipantsWrapper>
+          </S.CardDetails> */}
+          {/* <S.ParticipantsWrapper>
             <ParticipantsDropdown selectedParticipants={participants} setSelectedParticipants={updateParticipants} />
-          </S.ParticipantsWrapper>
+          </S.ParticipantsWrapper> */}
         </S.CardContent>
       </S.CollapseCard>
     </S.CardWrapper>

@@ -3,25 +3,25 @@ import * as S from './Tag.styles';
 
 export interface ITag {
   id: string;
-  title: string;
+  activity_difficulty: string;
   bgColor: 'error' | 'success' | 'warning';
 }
 
 interface TagProps {
-  title: string;
+  activity_difficulty: string;
   color?: string;
   bgColor?: 'error' | 'success' | 'warning' | 'primary';
   removeTag?: () => void;
 }
 
-export const Tag: React.FC<TagProps> = ({ title, color, bgColor, removeTag, ...otherProps }) => {
+export const Tag: React.FC<TagProps> = ({ activity_difficulty, color, bgColor, removeTag, ...otherProps }) => {
   const style = {
     color: color || 'var(--white)',
     backgroundColor: bgColor ? `var(--${bgColor}-color)` : 'var(--orange)',
   };
   return (
     <S.TagWrapper style={style} {...otherProps}>
-      #{title}
+      #{activity_difficulty}
       {!!removeTag && (
         <S.RemoveTagWrapper
           onClick={(e) => {

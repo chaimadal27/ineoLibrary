@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import * as S from './NewLaneForm.styles';
 
 interface NewLaneFormProps {
-  onAdd: (values: { id: string; title: string }) => void;
+  onAdd: (values: { id: string | number; session_title: string }) => void;
   onCancel: () => void;
 }
 
@@ -14,7 +14,7 @@ export const NewLaneForm: React.FC<NewLaneFormProps> = ({ onAdd, onCancel }) => 
   const handleSubmit = (values: { title: string }) => {
     onAdd({
       id: uuidv4(),
-      title: values.title || t('kanban.unnamedLabel'),
+      session_title: values.title || t('kanban.unnamedLabel'),
     });
   };
 

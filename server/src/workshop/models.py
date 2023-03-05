@@ -7,34 +7,34 @@ from mixins.behaviors import (
 
 class Workshop(Timestampable, Authorable, Sharable):
     USES = [
-        ('BUSINESS_CREATION','Business Creation'),
-        ('POST_CREATION', 'Post Creation'),
-        ('AGRICULTURE_BUSINESS','Agriculture Business'),
-        ('STARTUPS','Startups'),
-        ('SOCIAL_BUSINESS','Social Business'),
-        ('GREEN_BUSINESS','Green Business'),
-        ('WOMEN_ENTREPRENEURSHIP', 'Women Entrepreneurship')
+        ('Business Creation','Business Creation'),
+        ('Post Creation', 'Post Creation'),
+        ('Agriculture Business','Agriculture Business'),
+        ('Startups','Startups'),
+        ('Social Business','Social Business'),
+        ('Green Business','Green Business'),
+        ('Women Entrepreneurship', 'Women Entrepreneurship')
     ]
     LITERACY = [
-        ('BASIC','basic'),
-        ('INTERMIDIATE','intermidiate'),
-        ('ADVANCED','advanced')
+        ('Basic','Basic'),
+        ('Intermidiate','Intermidiate'),
+        ('Advanced','Advanced')
     ]
     SKILLS = [
-        ('COMPUTER_SKILLS', 'Computer Skills'),
-        ('NUMERACY_SKILLS','Numeracy Skills')
+        ('Computer Skills', 'Computer Skills'),
+        ('Numeracy Skills','Numeracy Skills')
     ]
     METHOD = (
-        ('ONLINE','Online'),
-        ('BLENDED','Blended'),
-        ('PRESENTIAL', 'Presential')
+        ('Online','Online'),
+        ('Blended','Blended'),
+        ('Presential', 'Presential')
     )
-    workshop_title = models.CharField(max_length=100)
-    uses = models.CharField(max_length=100, choices=USES, default='Post Creation')
-    target_skills = models.CharField(max_length=100, choices=SKILLS, default='Computer Skills')
-    duration = models.PositiveIntegerField()
-    workshop_method = models.CharField(max_length=100, choices=METHOD, default='Online')
-    workshop_image = models.ImageField(upload_to="workshopimages/", null=True)
+    workshop_title = models.CharField(max_length=100, null=True)
+    uses = models.CharField(max_length=100, choices=USES, default='Post Creation', null=True)
+    target_skills = models.CharField(max_length=100, choices=SKILLS, default='Computer Skills', null=True)
+    duration = models.PositiveIntegerField(null=True)
+    workshop_method = models.CharField(max_length=100, choices=METHOD, default='Online', null=True)
+    #workshop_image = models.ImageField(upload_to="workshopimages/", null=True)
     workshop_description = models.TextField(null=True)
 
     class Meta:

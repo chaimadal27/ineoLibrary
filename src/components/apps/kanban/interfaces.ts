@@ -10,13 +10,21 @@ export interface Participant {
   avatar?: string;
 }
 
+export interface ActivityDifficulty {
+  id: string;
+  activity_difficulty: string;
+  bgColor: 'error' | 'warning' | 'success';
+}
+
+
+
 export interface CardState {
   id?: number | string;
   activity_title?: string;
   activity_description?:string;
   activity_method?: string;
   activity_technique?:string;
-  activity_difficulty?:string;
+  activity_difficulty?:ActivityDifficulty[];
   activity_duration?:number;
   activity_objectives?:string;
   activity_needs?:string;

@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from '@app/components/common/Dropdown/Dropdown';
-import { Tag as ITag } from '../../interfaces';
+import { Tag as ITag, ActivityDifficulty as Difficulty } from '../../interfaces';
 import { kanbanDifficulty } from 'constants/kanbanTags';
 import * as S from './TagDropdown.styles';
 import { Tag } from 'components/common/Tag/Tag';
 import { PlusCircleFilled } from '@ant-design/icons';
 
 interface TagDropdownProps {
-  selectedTags: ITag[];
-  setSelectedTags?: (state: ITag[]) => void;
+  selectedTags: Difficulty[];
+  setSelectedTags?: (state: Difficulty[]) => void;
 }
 
 export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelectedTags }) => {
@@ -20,7 +20,7 @@ export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelec
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
-  const onTagClick = (tag: ITag) => {
+  const onTagClick = (tag: Difficulty) => {
     const isSelected = selectedTagsIds.includes(tag.id);
     const updatedTags = isSelected ? [] : [tag];
     setSelectedTags ? setSelectedTags(updatedTags): undefined;
@@ -33,7 +33,7 @@ export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelec
       onVisibleChange={setDropdownVisible}
       overlay={
         <S.EditTagPopover>
-          {kanbanTagData.map((tag: ITag) => (
+          {kanbanTagData.map((tag: Difficulty) => (
             <S.EditTagPopoverLine
               key={tag.id}
               onClick={(e) => {
@@ -42,7 +42,7 @@ export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelec
               }}                
             >
               <S.PopoverCheckbox checked={selectedTagsIds.includes(tag.id)} />
-              <S.TagWrapper backgroundColor={tag.bgColor}>#{tag.title}</S.TagWrapper>
+              <S.TagWrapper backgroundColor={tag.bgColor}>#{tag.activity_difficulty}</S.TagWrapper>
             </S.EditTagPopoverLine>
           ))}
           <S.RemoveTagWrapper onClick={() => setDropdownVisible(false)} >

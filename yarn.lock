@@ -10965,6 +10965,7 @@ __metadata:
     react-slick: ^0.28.1
     react-trello: ^2.2.11
     react-verification-input: ^2.0.3
+    reactjs-popup: ^2.0.5
     slick-carousel: ^1.8.1
     styled-components: ^5.3.0
     stylelint: ^13.13.1
@@ -15293,6 +15294,16 @@ __metadata:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
   checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
+  languageName: node
+  linkType: hard
+
+"reactjs-popup@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "reactjs-popup@npm:2.0.5"
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 7b9ebd49e66fb936e85cd4e7a3713cdf903e95f802e5783963f1f9c000d2f8bdb7e4b9967756677238b2fcd9c07637282f2a037403374931ba42865ffffe60e6
   languageName: node
   linkType: hard
 

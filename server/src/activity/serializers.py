@@ -5,6 +5,7 @@ class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
         fields = [
+            'id',
             'activity_title',
             'activity_method',
             'activity_technique',
@@ -14,9 +15,10 @@ class ActivitySerializer(serializers.ModelSerializer):
             'activity_needs',
             'activity_organization',
             'activity_variations',
-            'activity_attachements',
-            'workshop',
+            'activity_description',
+            #'activity_attachements',
+            'session',
             'created_at',
-            'day_index',
+            # 'laneId',
         ]
-        read_only_fields = ['id','workshop','created_at']
+        read_only_fields = ['id','session','created_at']

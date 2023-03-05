@@ -39,6 +39,7 @@
     "react-insta-stories": "^2.3.0",
     "react-leaflet": "next",
     "react-phone-number-input": "^3.1.27",
+    "react-quill": "^2.0.0",
     "react-redux": "^7.2.6",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^6.0.2",

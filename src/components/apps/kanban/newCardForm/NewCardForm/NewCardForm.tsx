@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useContext, useEffect } from 'react';
 import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
-import { Input } from 'antd';
+import { Input, Form } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { CardState, Tag, Participant } from '../../interfaces';
 import { TagDropdown } from '../TagDropdown/TagDropdown';
@@ -16,8 +16,10 @@ import { InputNumber } from '@app/components/common/inputs/InputNumber/InputNumb
 import { PlusOutlined } from '@ant-design/icons';
 import * as s from '../../AddCardLink/AddCardLink.styles';
 import { AddCardLink } from '../../AddCardLink/AddCardLink';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-const formInputs = [
+ const formInputs = [
   {
     title: 'kanban.title',
     label: 'Title',
@@ -70,6 +72,7 @@ const formInputs = [
   }
 ];
 
+
 interface NewCardFormProps {
   onAdd: (state: CardState) => void;
   onCancel: () => void;
@@ -78,6 +81,49 @@ interface NewCardFormProps {
 export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
 
   const navigate = useNavigate()
+  var toolbarOptions = [
+    ['bold', 'italic', 'underline'],
+    [{ 'size': ['small', false, 'large', 'huge'] }],  
+    ['blockquote', 'code-block'],
+  
+    // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    // [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    // [{ 'direction': 'rtl' }],                        // text direction
+    ['link', 'image'],
+  
+    // custom dropdown
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  
+    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+  
+    ['clean']                                         // remove formatting button
+  ];
+  const formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "align",
+    "strike",
+    "script",
+    "blockquote",
+    "background",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "video",
+    "color",
+    "code-block"
+  ];
+  
 
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [selectedParticipants, setSelectedParticipants] = useState<Participant[]>([]);
@@ -93,17 +139,17 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
   }
   
   const { t } = useTranslation();
-
+  
   const onFinish = (values: CardState) => {
     setLoading(true);
     setTimeout(() => {
       setFieldsChanged(false)
       onAdd({ ...values, tags: selectedTags, participants: selectedParticipants });
-      console.log(values)
       setIsModalOpen(false)
       setLoading(false);
     }, 1000);
   };
+  
   
   const formItems = formInputs.map((item, index) => {
     const {label, name} = item
@@ -114,7 +160,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                   name='activity_method'
                   label='Method'
                   hasFeedback
-                  rules={[{required:true, message:'you have to choose an activity method'}]}
+                  rules={[{message:'you have to choose an activity method'}]}
                   >
                   <Select width={100}>
                     <Option value="Presential">Presential</Option>
@@ -140,7 +186,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                     <Option value="Hard">Hard</Option>
                   </Select>
               </BaseButtonsForm.Item> */}
-               <TagDropdown selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
+          <TagDropdown selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
         </>
       )
     }
@@ -186,15 +232,22 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
       )
     }
     return (
-      <>
-      <BaseButtonsForm.Item label={label} key={index}>
-        <label>
-         <BaseButtonsForm.Item name={name}>
-           <Input placeholder={label} />
-         </BaseButtonsForm.Item>
-       </label>
-      </BaseButtonsForm.Item> 
-      </>
+   
+     
+      <BaseButtonsForm.Item label={label} key={index} name={name}>
+  {/* <label>
+    <BaseButtonsForm.Item name={name} > */}
+      {/* <Input placeholder={label} /> */} 
+      <ReactQuill
+      formats={formats}
+       modules= {{
+        toolbar: toolbarOptions
+      }}
+      theme="snow"
+       />
+    {/* </BaseButtonsForm.Item>
+  </label> */}
+ </BaseButtonsForm.Item> 
     )
   })
   return (

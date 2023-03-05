@@ -15,18 +15,15 @@ import * as S from './DashboardPage.styles';
 const MedicalDashboardPage: React.FC = () => {
   const { isDesktop } = useResponsive();
 
-
-
-
   const desktopLayout = (
     <Row>
-      <S.LeftSideCol xl={18} xxl={10} id="desktop-content">
+      <S.LeftSideCol xl={16} xxl={17} id="desktop-content">
         <Row gutter={[60, 60]}>
-          {/*
+          
           <Col span={24}>
-            <TrendingCreators />
+            {/* <TrendingCreators /> */}
           </Col>
-          */}
+         
           <Col span={24}>
             <RecentlyAddedNft />
           </Col>
@@ -35,14 +32,14 @@ const MedicalDashboardPage: React.FC = () => {
             <TrendingCollections />
           </Col>
 
-          {/* <Col span={24}>
-            <RecentActivity />
-          </Col> */}
+          <Col span={24}>
+            {/* <RecentActivity /> */}
+          </Col>
         </Row>
         <References />
       </S.LeftSideCol>
 
-      <S.RightSideCol xl={6} xxl={7}>
+      <S.RightSideCol xl={8} xxl={7}>
         <div id="balance">{/*<Balance />*/}</div>
         <S.Space />
         <div id="total-earning">{/*<TotalEarning />*/}</div>
@@ -57,7 +54,7 @@ const MedicalDashboardPage: React.FC = () => {
   const mobileAndTabletLayout = (
     <Row gutter={[20, 24]}>
       <Col span={24}>
-        <TrendingCreators />
+        {/* <TrendingCreators /> */}
       </Col>
 
       <Col span={24}>
@@ -69,7 +66,7 @@ const MedicalDashboardPage: React.FC = () => {
       </Col>
 
       <Col span={24}>
-        <RecentActivity />
+        {/* <RecentActivity /> */}
       </Col>
     </Row>
   );

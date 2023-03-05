@@ -9,11 +9,11 @@ interface ModalProps extends AntModalProps {
   size?: 'small' | 'medium' | 'large';
 }
 
-export const Modal: React.FC<ModalProps> = ({ size = 'medium', children, ...props }) => {
+export const Modal: React.FC<ModalProps> = ({ size = 'large', children, ...props }) => {
   const modalSize = Object.entries(modalSizes).find((sz) => sz[0] === size)?.[1];
 
   return (
-    <S.Modal getContainer={false} width={modalSize} {...props}>
+    <S.Modal getContainer={false} width={950} {...props}>
       {children}
     </S.Modal>
   );

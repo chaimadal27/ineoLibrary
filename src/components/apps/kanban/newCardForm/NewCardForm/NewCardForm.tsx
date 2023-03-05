@@ -2,7 +2,7 @@ import React, { useMemo, useState, useContext, useEffect } from 'react';
 import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
 import { Input, Form } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { CardState, Tag, Participant } from '../../interfaces';
+import { CardState, Tag, Participant, ActivityDifficulty } from '../../interfaces';
 import { TagDropdown } from '../TagDropdown/TagDropdown';
 import * as S from './NewCardForm.styles';
 import { ParticipantsDropdown } from '../ParticipantsDropdown/ParticipantsDropdown';
@@ -125,10 +125,11 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
   ];
   
 
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<ActivityDifficulty[]>([]);
   const [selectedParticipants, setSelectedParticipants] = useState<Participant[]>([]);
   const [isLoading, setLoading] = useState(false);
-
+  
+  const [isExploreOpen,setExploreOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isActivityOpen, setIsActivityOpen] = useState(true)
   const [modalTitle, setModal] = useState('Explore existing activities or add a new one')
@@ -144,7 +145,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
     setLoading(true);
     setTimeout(() => {
       setFieldsChanged(false)
-      onAdd({ ...values, tags: selectedTags, participants: selectedParticipants });
+      onAdd({ ...values, activity_difficulty: selectedTags });
       setIsModalOpen(false)
       setLoading(false);
     }, 1000);
@@ -169,6 +170,30 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                   </Select>                
                 </BaseButtonsForm.Item>
                 </>
+      )
+    }
+    if (name === 'activity_technique') {
+      return (
+        <>
+         <BaseButtonsForm.Item
+                 name='activity_technique'
+                 label='Technique'
+                 hasFeedback
+                 rules={[{required:true, message:'you must choose at least one need'}]}
+                >
+                  <Select width={100}>
+                    <Option value="Business Simulation" key={1}>Business Simulation</Option>
+                    <Option value="Role play simulation" key={2}>Role play simulation</Option>
+                    <Option value="Role play" key={3}>Role play</Option>
+                    <Option value="Idea generation" key={4}>Idea generation</Option>
+                    <Option value="Group discussion" key={5}>Group discussion</Option>
+                    <Option value="Team challenge" key={6}>Team challenge</Option>
+                    <Option value="Multimedia, Video" key={7}>Multimedia, Video</Option>
+                    <Option value="Story telling, drawing" key={8}>Story telling, drawing</Option>
+                    {/* <Option value="Hands-on, Application" key={9}>Hands-on, Application</Option> */}
+                  </Select>
+              </BaseButtonsForm.Item>
+        </>
       )
     }
     if (name === 'activity_difficulty') {
@@ -199,7 +224,6 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                     <InputNumber
                       min={0}
                       keyboard={true}
-                      defaultValue={10}
                     />
                   </BaseButtonsForm.Item>
                 </label>
@@ -216,21 +240,17 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
                  hasFeedback
                  rules={[{required:true, message:'you must choose at least one need'}]}
                 >
-                  <Select mode='multiple' width={100}>
-                    <Option value="Business Simulation">Business Simulation</Option>
-                    <Option value="Role play simulation">Role play simulation</Option>
-                    <Option value="Role play">Role play</Option>
-                    <Option value="Idea generation">Idea generation</Option>
-                    <Option value="Group discussion">Group discussion</Option>
-                    <Option value="Team challenge">Team challenge</Option>
-                    <Option value="Multimedia, Video">Multimedia, Video</Option>
-                    <Option value="Storytelling, drawing">Storytelling, drawing</Option>
-                    <Option value="Hands-on, Application">Hands-on, Application</Option>
+                  <Select width={100}>
+                    <Option value="Metaplan cards" key={1}>Metaplan cards</Option>
+                    <Option value="Flip cards" key={2}>Flip cards</Option>
+                    <Option value="Pinboard" key={3}>Pinboard</Option>
+                    <Option value="Special facilitation tool" key={4}>Special facilitation tool</Option>
                   </Select>
             </BaseButtonsForm.Item>
          </>
       )
     }
+    
     return (
    
      
@@ -286,7 +306,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
               </Col>
               <Col span={5}></Col>
               <Col>
-                <Button onClick={()=>navigate('/')}>Explore Library </Button>
+                <Button onClick={()=>setExploreOpen(true)}>Explore Library </Button>
               </Col>
           </Row>
             ) :     
@@ -299,10 +319,10 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel}) => {
               onFinish={onFinish}
             >
               {formItems}
-              <ParticipantsDropdown
+              {/* <ParticipantsDropdown
                 selectedParticipants={selectedParticipants}
                 setSelectedParticipants={setSelectedParticipants}
-              /> 
+              />   */}
           </BaseButtonsForm>
           }
         </Modal>

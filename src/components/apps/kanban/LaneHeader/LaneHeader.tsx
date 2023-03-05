@@ -7,7 +7,7 @@ interface LaneHeaderProps {
   updateTitle: () => void;
   editLaneTitle: boolean;
   style: CSSStyleSheet;
-  title: string;
+  session_title: string;
   onDoubleClick: () => void;
   cards: Array<CardState>;
 }
@@ -15,8 +15,8 @@ interface LaneHeaderProps {
 export const LaneHeader: React.FC<LaneHeaderProps> = ({
   updateTitle,
   onDoubleClick,
-  editLaneTitle = false,
-  title,
+  editLaneTitle = true,
+  session_title,
   style,
   cards,
 }) => {
@@ -25,10 +25,10 @@ export const LaneHeader: React.FC<LaneHeaderProps> = ({
     <S.Header onDoubleClick={onDoubleClick} editLaneTitle={editLaneTitle} style={style}>
       <S.Title>
         {editLaneTitle ? (
-          <InlineInput value={title} border placeholder={title} resize="vertical" onSave={updateTitle} />
+          <InlineInput value={session_title} border placeholder={session_title} resize="vertical" onSave={updateTitle} />
         ) : (
           <>
-            {title}
+            {session_title}
             {cards.length ? <S.Dot>·</S.Dot> : ''}
             {numberOfCards}
           </>

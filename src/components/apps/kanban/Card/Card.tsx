@@ -5,7 +5,11 @@ import { Dropdown } from '@app/components/common/Dropdown/Dropdown';
 import { Button } from '@app/components/common/buttons/Button/Button';
 import { ParticipantsDropdown } from '@app/components/apps/kanban/newCardForm/ParticipantsDropdown/ParticipantsDropdown';
 import { TagDropdown } from '@app/components/apps/kanban/newCardForm/TagDropdown/TagDropdown';
-import { CardState, Tag as ITag, Participant as IParticipant } from '@app/components/apps/kanban/interfaces';
+import { CardState, Tag as ITag, Participant as IParticipant, ActivityDifficulty as Difficulty } from '@app/components/apps/kanban/interfaces';
+import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
+import { Select, Option } from '@app/components/common/selects/Select/Select';
+
+
 import * as S from './Card.styles';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
@@ -22,16 +26,16 @@ interface CardProps {
   activity_method?: string;
   activity_description?:string;
   activity_technique?:string;
-  activity_difficulty?:string;
+  activity_difficulty?:Difficulty[];
   activity_duration?:number;
   activity_objectives?:string;
   activity_needs?:string;
   activity_organization?:string;
   activity_variations?:string;
   cardDraggable?:boolean;
-  tags:ITag[];
-  participants:IParticipant[];
-  editable?:boolean;
+  // tags:ITag[];
+  // participants:IParticipant[];
+  // editable?:boolean;
 }
 
 interface EditPopoverProps {
@@ -76,16 +80,16 @@ export const Card: React.FC<CardProps> = ({
   activity_description,
   activity_method,
   activity_technique,
-  activity_difficulty,
+  activity_difficulty=[],
   activity_duration,
   activity_objectives,
   activity_needs,
   activity_organization,
   activity_variations,
   cardDraggable,
-  tags = [],
-  participants = [],
-  editable,
+  // tags = [],
+  // participants = [],
+  // editable,
 }) => {
   const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(true);
@@ -106,6 +110,10 @@ export const Card: React.FC<CardProps> = ({
   const updateTags = (tags: ITag[]) => {
     updateCard({ tags });
   };
+
+  const updateDifficulty = (activity_difficulty: Difficulty[]) => {
+    updateCard({ activity_difficulty });
+  }
 
   const updateMethod = (tags: ITag[]) => {
     updateCard({ tags });
@@ -223,13 +231,24 @@ const onReviewCard = () => {
           </S.CardDetails> */}
           <S.CardDetails>
             {isEditable ? (
-              <S.Input
-                value={activity_technique}
-                border
-                placeholder='Technique'
-                resize="vertical"
-                onSave={(value: string) => updateCard({activity_technique: value})}
-              />
+              <BaseButtonsForm.Item
+              name='activity_technique'
+             //  label='Needs'
+              hasFeedback
+              rules={[{required:true, message:'you must choose at least one need'}]}
+             >
+               <Select defaultValue={activity_technique}>
+                 <Option value="Business Simulation" key="Business Simulation">Business Simulation</Option>
+                 <Option value="Role play simulation" key="Role play simulation">Role play simulation</Option>
+                 <Option value="Role play" key="Role play">Role play</Option>
+                 <Option value="Idea generation" key="Idea generation">Idea generation</Option>
+                 <Option value="Group discussion" key="Group discussion">Group discussion</Option>
+                 <Option value="Team challenge" key="Team challenge">Team challenge</Option>
+                 <Option value="Multimedia, Video" key="Multimedia, Video">Multimedia, Video</Option>
+                 <Option value="Storytelling, drawing" key="Storytelling, drawing">Storytelling, drawing</Option>
+                 {/* <Option value="Hands-on, Application" key={9}>Hands-on, Application</Option> */}
+               </Select>
+           </BaseButtonsForm.Item>
             ) : (
               activity_technique
             )}
@@ -243,9 +262,9 @@ const onReviewCard = () => {
               //   resize="vertical"
               //   onSave={(value: string) => updateCard({activity_difficulty: value})}
               // />
-              <TagDropdown selectedTags={tags} setSelectedTags={updateTags}  />
+              <TagDropdown selectedTags={activity_difficulty} setSelectedTags={updateDifficulty}  />
             ) : (
-              <TagDropdown selectedTags={tags} />
+              <TagDropdown selectedTags={activity_difficulty} />
             )}
           </S.CardDetails>
           <S.CardDetails>

@@ -1,7 +1,7 @@
 interface Tag {
   id: string;
-  title: string;
-  bgColor: 'error' | 'warning' | 'success' | 'primary';
+  activity_difficulty: string;
+  bgColor: 'error' | 'warning' | 'success';
 }
 
 interface KanbanTags {
@@ -10,18 +10,18 @@ interface KanbanTags {
 
 export const kanbanDifficulty: KanbanTags = {
   high: {
-    id: 'high',
-    title: 'high',
+    id: 'HIGH',
+    activity_difficulty: 'High',
     bgColor: 'error',
   },
   medium: {
-    id: 'medium',
-    title: 'medium',
+    id: 'INTERMIDIATE',
+    activity_difficulty: 'Intermidiate',
     bgColor: 'warning',
   },
   low: {
-    id: 'low',
-    title: 'low',
+    id: 'EASY',
+    activity_difficulty: 'Easy',
     bgColor: 'success',
   },
 };

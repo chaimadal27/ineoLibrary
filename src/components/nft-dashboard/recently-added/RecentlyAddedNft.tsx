@@ -19,7 +19,9 @@ export const RecentlyAddedNft: React.FC = () => {
   const { mobileOnly, isTablet } = useResponsive();
   const dispatch = useAppDispatch()
   
-  const workshops:WorkshopModel[] = useAppSelector((state)=>state.workshop.workshop)
+  const workshops:WorkshopModel[] | undefined = useAppSelector((state)=>state.workshop.workshop)
+
+  
 
 
   useEffect(() => {
@@ -28,8 +30,8 @@ export const RecentlyAddedNft: React.FC = () => {
 
   const cards = useMemo(()=>{
     return {
-      mobile: workshops.map((workshop)=> <NftCard key={workshop.id} workshop={workshop} />),
-      tablet: workshops.map((workshop)=> <div key={workshop.id}><S.CardWrapper><NftCard key={workshop.id} workshop={workshop} /></S.CardWrapper></div>)
+      mobile: workshops?.map((workshop)=> <NftCard key={workshop.id.toString()} workshop={workshop} />),
+      tablet: workshops?.map((workshop)=> <div key={workshop.id.toString()}><S.CardWrapper><NftCard key={workshop.id.toString()} workshop={workshop} /></S.CardWrapper></div>)
     }
   },[workshops, t, mobileOnly, isTablet, useAppSelector])
 

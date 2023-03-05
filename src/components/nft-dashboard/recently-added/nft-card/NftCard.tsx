@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useResponsive } from '@app/hooks/useResponsive';
-import { NftItem } from '@app/api/nftDashboard.api';
-import { formatNumberWithCommas, getCurrencyPrice } from '@app/utils/utils';
 import * as S from './NftCard.styles';
 import { WorkshopModel } from '@app/domain/WorkshopModel';
 import { useNavigate } from 'react-router-dom';
+
+
+
 
 interface Workshops {
   workshop: WorkshopModel
@@ -16,26 +17,20 @@ export const NftCard: React.FC<Workshops> = ({ workshop }) => {
   const navigate = useNavigate()
 
 
+  const handleClick = () => {
+    navigate(`/apps/kanban/${id.toString()}`, {state:{data:workshop}})
+  }
+
+
   const tabletLayout = (
     <>
       <S.InfoHeader>
         <S.InfoText>@{id}</S.InfoText>
       </S.InfoHeader>
-
       <S.InfoRow>
         <S.CurrentBid>{workshop_description}</S.CurrentBid>
-        {/* <S.Bid>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBid), 'USD')}</S.Bid> */}
       </S.InfoRow>
 
-      {/* <S.InfoFooter>
-        <S.CurrentBidWrapper>
-          <S.CurrentBid>Current Bid</S.CurrentBid>
-          <S.BidCrypto>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBidCrypto), 'ETH', false)}</S.BidCrypto>
-        </S.CurrentBidWrapper>
-        <S.CurrentBidWrapper>
-          <S.Bid>{getCurrencyPrice(formatNumberWithCommas(workshop.currentBid), 'USD')}</S.Bid>
-        </S.CurrentBidWrapper>
-      </S.InfoFooter> */}
     </>
   );
 
@@ -54,7 +49,7 @@ export const NftCard: React.FC<Workshops> = ({ workshop }) => {
   );
 
   return (
-    <S.Card padding={0} $img={workshop.workshop_image} onClick={()=>navigate(`/apps/kanban`)} >
+    <S.Card padding={0} $img={workshop.workshop_image} onClick={()=>handleClick()} >
       <S.NftImage src={workshop.workshop_image} alt="nftImage" />
       <S.NftInfo>
         <S.InfoRow>

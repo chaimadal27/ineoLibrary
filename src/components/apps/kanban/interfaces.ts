@@ -23,7 +23,7 @@ export interface CardState {
   activity_title?: string;
   activity_description?:string;
   activity_method?: string;
-  activity_technique?:string;
+  activity_technique?:string[];
   activity_difficulty?:ActivityDifficulty[];
   activity_duration?:number;
   activity_objectives?:string;

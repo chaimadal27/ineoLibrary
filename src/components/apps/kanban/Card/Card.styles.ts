@@ -22,7 +22,6 @@ export const CardContent = styled(Panel)`
   & .ant-collapse-content .ant-collapse-content-box {
     padding: 0;
   }
- 
 `;
 
 export const CollapseCard = styled(Collapse)`
@@ -37,14 +36,12 @@ export const CollapseCard = styled(Collapse)`
   & .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box {
     padding: 0;
   }
-  .mce-notification {display: none !important;}
 `;
 
 export const ParticipantsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  .mce-notification {display: none !important;}
 `;
 
 export const ArrowDownIcon = styled(DownOutlined)<ArrowDownIcon>`
@@ -53,7 +50,8 @@ export const ArrowDownIcon = styled(DownOutlined)<ArrowDownIcon>`
 
 export const CardWrapper = styled(MovableCardWrapper)`
   position: relative;
-  .mce-notification {display: none !important;}
+  padding: 2rem;
+
 `;
 
 export const CardRightContent = styled(RightContent)`
@@ -62,7 +60,6 @@ export const CardRightContent = styled(RightContent)`
   align-items: center;
   gap: 1rem;
   padding-right: 0;
-  .mce-notification {display: none !important;}
 `;
 
 export const CardTitle = styled(Title)`
@@ -72,7 +69,6 @@ export const CardTitle = styled(Title)`
   color: var(--text-main-color);
   margin-left: -0.5rem;
   display: flex;
-  .mce-notification {display: none !important;}
 `;
 
 export const CardHeader = styled(Header)`
@@ -82,7 +78,6 @@ export const CardHeader = styled(Header)`
   min-height: 1.375rem;
   display: flex;
   align-items: center;
-  .mce-notification {display: none !important;}
 `;
 
 export const CardDetails = styled(Detail)`
@@ -92,7 +87,6 @@ export const CardDetails = styled(Detail)`
   margin-left: -0.5rem;
   margin-top: 1rem;
   display: flex;
-  .mce-notification {display: none !important;}
 `;
 
 export const CardFooter = styled(Footer)`
@@ -101,17 +95,14 @@ export const CardFooter = styled(Footer)`
   padding-top: 1rem;
   gap: 0.625rem;
   justify-content: flex-start;
-  .mce-notification {display: none !important;}
 `;
 
 export const CardMenu = styled(Menu)`
   box-shadow: var(--box-shadow-hover);
-  .mce-notification {display: none !important;}
 `;
 
 export const MenuItem = styled(Menu.Item)`
   font-size: ${FONT_SIZE.xs};
-  .mce-notification {display: none !important;}
 `;
 
 export const Input = styled(InlineInput)`

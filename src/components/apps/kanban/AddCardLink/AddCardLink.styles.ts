@@ -14,7 +14,12 @@ export const AddCardWrapper = styled.div`
   font-size: ${FONT_SIZE.xxl};
   color: var(--border-color);
   .ql-editor {
-    min-height: 60px
+    min-height: 70px
+  }
+  .ql-editor-Description {
+    .ql-editor {
+      min-height: 150px
+    }  
   }
 `;
 export const Card = styled(CommonCard)`

@@ -248,7 +248,6 @@ export const Card: React.FC<CardProps> = ({
 
   const handleTechniqueChange = (values: string[]) => {
     setIsUpdated({ ...isUpdated, activity_technique: values });
-    console.log('technique', values);
   };
 
   const handleNeedsChange = (value: string) => {
@@ -284,7 +283,7 @@ export const Card: React.FC<CardProps> = ({
             hasFeedback
             //  rules={[{message:'youx must choose at least one need'}]}
           >
-            <Select width={100} onSelect={handleTechniqueChange} defaultValue={activity_technique} mode="multiple">
+            <Select width={100} onChange={handleTechniqueChange} defaultValue={activity_technique} mode="multiple">
               <Option value="Business Simulation" key={1}>
                 Business Simulation
               </Option>

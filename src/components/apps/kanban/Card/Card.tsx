@@ -570,7 +570,7 @@ export const Card: React.FC<CardProps> = ({
               <TagDropdown selectedTags={activity_difficulty} />
               {/* )} */}
             </S.CardDetails>
-            <S.CardDetails>{isUpdated.activity_duration}</S.CardDetails>
+            <S.CardDetails style={{ marginLeft: '10px' }}>{isUpdated.activity_duration}</S.CardDetails>
             <S.CardDetails>
               {isEditable ? (
                 <ReactQuill

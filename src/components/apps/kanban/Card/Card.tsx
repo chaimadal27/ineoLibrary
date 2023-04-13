@@ -45,30 +45,25 @@ interface CardProps {
 
 interface EditPopoverProps {
   onDelete: () => void;
-  onArchive: () => void;
-  onEdit: () => void;
+  // onEdit: () => void;
   onReview: () => void;
 }
 
-const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onEdit, onArchive, onReview, ...props }) => {
+const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onReview, ...props }) => {
   const { t } = useTranslation();
 
   return (
     <S.CardMenu selectable={true} {...props}>
-      <S.MenuItem key="1" onClick={onDelete}>
-        {t('common.delete')}
-      </S.MenuItem>
-
-      <S.MenuItem key="2" onClick={onEdit}>
+      {/* <S.MenuItem key="2" onClick={onEdit}>
         Edit
-      </S.MenuItem>
+      </S.MenuItem> */}
 
-      <S.MenuItem key="3" onClick={onReview}>
+      <S.MenuItem key="1" onClick={onReview}>
         Review
       </S.MenuItem>
 
-      <S.MenuItem key="4" onClick={onArchive}>
-        {t('kanban.archive')}
+      <S.MenuItem key="2" onClick={onDelete}>
+        {t('common.delete')}
       </S.MenuItem>
     </S.CardMenu>
   );
@@ -98,7 +93,7 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(true);
-  const [isEditable, setIsEditable] = useState(true);
+  // const [isEditable, setIsEditable] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isFieldsChanged, setFieldsChanged] = useState(false);
@@ -136,9 +131,9 @@ export const Card: React.FC<CardProps> = ({
     updateCard({ participants });
   };
 
-  const onEditCard = () => {
-    setIsEditable(!isEditable);
-  };
+  // const onEditCard = () => {
+  //   setIsEditable(!isEditable);
+  // };
 
   const onReviewCard = () => {
     setIsModalOpen(true);
@@ -460,16 +455,14 @@ export const Card: React.FC<CardProps> = ({
                     e.stopPropagation();
                   }}
                 >
-                  {isEditable ? (
-                    <ReactQuill
-                      style={{ zIndex: 1, overflow: 'visible', position: 'relative' }}
-                      theme="bubble"
-                      value={activity_title}
-                      onChange={(value: string) => updateCard({ activity_title: value })}
-                    />
-                  ) : (
-                    <ReactQuill theme="bubble" defaultValue={activity_title} readOnly={true} />
-                  )}
+                  <ReactQuill
+                    style={{ zIndex: 1, overflow: 'visible', position: 'relative' }}
+                    theme="bubble"
+                    value={activity_title}
+                    defaultValue={activity_title}
+                    readOnly={true}
+                  />
+                  {/* <ReactQuill theme="bubble" defaultValue={activity_title} readOnly={true} /> */}
                 </S.CardTitle>
                 <S.CardRightContent>
                   <Button noStyle type="text" icon={<S.ArrowDownIcon $expanded={isExpanded} />} />
@@ -482,12 +475,7 @@ export const Card: React.FC<CardProps> = ({
                         }}
                       >
                         {' '}
-                        <EditPopover
-                          onDelete={onDeleteCard}
-                          onEdit={onEditCard}
-                          onReview={onReviewCard}
-                          onArchive={onDeleteCard}
-                        />{' '}
+                        <EditPopover onDelete={onDeleteCard} onReview={onReviewCard} />{' '}
                       </div>
                     }
                     placement="bottomRight"
@@ -509,16 +497,13 @@ export const Card: React.FC<CardProps> = ({
             }
           >
             <S.CardDetails>
-              {isEditable ? (
-                <ReactQuill
+              {/* <ReactQuill
                   style={{ zIndex: 999, overflow: 'visible' }}
                   theme="bubble"
                   value={activity_objectives}
                   onChange={(value: string) => updateCard({ activity_objectives: value })}
-                />
-              ) : (
-                <ReactQuill theme="bubble" value={activity_objectives} readOnly={true} />
-              )}
+                /> */}
+              <ReactQuill theme="bubble" value={activity_objectives} readOnly={true} />
             </S.CardDetails>
             {/* <S.CardDetails>
               {isEditable==false ? (
@@ -572,16 +557,13 @@ export const Card: React.FC<CardProps> = ({
             </S.CardDetails>
             <S.CardDetails style={{ marginLeft: '10px' }}>{isUpdated.activity_duration}</S.CardDetails>
             <S.CardDetails>
-              {isEditable ? (
-                <ReactQuill
+              {/* <ReactQuill
                   style={{ zIndex: 1, overflow: 'visible', position: 'relative' }}
                   theme="bubble"
                   value={activity_description}
                   onChange={(value: string) => updateCard({ activity_description: value })}
-                />
-              ) : (
-                <ReactQuill theme="bubble" value={activity_description} readOnly={true} />
-              )}
+                /> */}
+              <ReactQuill theme="bubble" value={activity_description} readOnly={true} />
             </S.CardDetails>
 
             {/* <S.CardDetails> */}

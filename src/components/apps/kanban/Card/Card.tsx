@@ -443,6 +443,13 @@ export const Card: React.FC<CardProps> = ({
       )}
 
       <S.CardWrapper data-id={id} onClick={onClick} style={style} className={className}>
+        <style>{`
+            .ql-editor-Des {
+              .ql-editor {
+                 max-height: 50px
+              }  
+            }
+          `}</style>
         <S.CollapseCard onChange={onArrowPress} bordered={false} defaultActiveKey={['1']}>
           <S.CardContent
             showArrow={false}
@@ -460,6 +467,7 @@ export const Card: React.FC<CardProps> = ({
                     theme="bubble"
                     value={activity_title}
                     defaultValue={activity_title}
+                    className="ql-editor-Des"
                     readOnly={true}
                   />
                   {/* <ReactQuill theme="bubble" defaultValue={activity_title} readOnly={true} /> */}
@@ -503,7 +511,7 @@ export const Card: React.FC<CardProps> = ({
                   value={activity_objectives}
                   onChange={(value: string) => updateCard({ activity_objectives: value })}
                 /> */}
-              <ReactQuill theme="bubble" value={activity_objectives} readOnly={true} />
+              <ReactQuill theme="bubble" value={activity_objectives} className="ql-editor-Des" readOnly={true} />
             </S.CardDetails>
             {/* <S.CardDetails>
               {isEditable==false ? (
@@ -563,7 +571,7 @@ export const Card: React.FC<CardProps> = ({
                   value={activity_description}
                   onChange={(value: string) => updateCard({ activity_description: value })}
                 /> */}
-              <ReactQuill theme="bubble" value={activity_description} readOnly={true} />
+              <ReactQuill theme="bubble" value={activity_description} className="ql-editor-Des" readOnly={true} />
             </S.CardDetails>
 
             {/* <S.CardDetails> */}

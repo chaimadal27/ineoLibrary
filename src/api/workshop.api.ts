@@ -16,7 +16,7 @@ export interface ActivityModel {
     id:string | number;
     activity_title:string;
     activity_method:string;
-    activity_technique:string;
+    activity_technique:string[];
     activity_difficulty:string;
     activity_duration:number | string;
     activity_objectives:string;
@@ -27,7 +27,6 @@ export interface ActivityModel {
     created_at:string;
   }
   
-
 export interface Workshop {
     id: string | number;
     workshop_title:string;
@@ -51,7 +50,7 @@ export interface Lanes {
 
 export const getWorkshops= async ():Promise<WorkshopsData> => {
     try {
-        const response = await httpApi.get<WorkshopsData>('http://localhost:8000/workshop/')
+        const response = await httpApi.get<WorkshopsData>('http://localhost:8000/workshop/list/')
         const data = await response.data
         return data
     } catch(e:any) {

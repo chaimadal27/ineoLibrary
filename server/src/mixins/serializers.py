@@ -328,7 +328,8 @@ class UniqueFieldsMixin(serializers.ModelSerializer):
                     unique_validator.set_context(self.fields[field_name])
                     unique_validator(validated_data[field_name])
                 else:
-                    unique_validator(validated_data[field_name], self.fields[field_name])
+                    unique_validator(
+                        validated_data[field_name], self.fields[field_name])
             except ValidationError as exc:
                 raise ValidationError({field_name: exc.detail})
 

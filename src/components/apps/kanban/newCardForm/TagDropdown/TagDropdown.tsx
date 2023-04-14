@@ -9,21 +9,30 @@ import { PlusCircleFilled } from '@ant-design/icons';
 
 interface TagDropdownProps {
   selectedTags: Difficulty[];
-  setSelectedTags?: (state: Difficulty[]) => void;
+  setSelectedTags?: (state: Difficulty[]) => void | undefined;
 }
 
-export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags, setSelectedTags }) => {
+export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags=[{id: "HIGH", activity_difficulty: "High", bgColor: "error"}], setSelectedTags }) => {
   const { t } = useTranslation();
 
   const kanbanTagData = Object.values(kanbanDifficulty);
-  const selectedTagsIds = selectedTags.map((item) => item.id);
+
+  if (selectedTags === null && setSelectedTags) {
+    setSelectedTags([...selectedTags,{id: "HIGH", activity_difficulty: "High", bgColor: "error"}])
+  }
+
+  let selectedTagsIds: string[]= [];
+  if (Array.isArray(selectedTags)) {
+    selectedTagsIds = selectedTags.map((item) => item.id);
+  }
+  // const selectedTagsIds = selectedTags?.map((item) => item.id);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const onTagClick = (tag: Difficulty) => {
     const isSelected = selectedTagsIds.includes(tag.id);
     const updatedTags = isSelected ? [] : [tag];
-    setSelectedTags ? setSelectedTags(updatedTags): undefined;
+    setSelectedTags ? setSelectedTags(updatedTags): null;
   };
 
   return (

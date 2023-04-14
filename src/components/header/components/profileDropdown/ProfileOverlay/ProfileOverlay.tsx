@@ -9,13 +9,13 @@ export const ProfileOverlay: React.FC = ({ ...props }) => {
 
   return (
     <DropdownMenu selectable={false} {...props}>
-      <S.MenuItem key={0}>
+      {/* <S.MenuItem key={0}>
         <S.Text>
           <Link to="/profile">{t('profile.title')}</Link>
         </S.Text>
-      </S.MenuItem>
+      </S.MenuItem> */}
       <S.ItemsDivider />
-      <S.MenuItem key={1}>
+      <S.MenuItem key={0}>
         <S.Text>
           <Link to="/logout">{t('header.logout')}</Link>
         </S.Text>

@@ -1,29 +1,42 @@
-import React, { useMemo, useState, useContext, useEffect } from 'react';
-import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
-import { Input, Form } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { CardState, Tag, Participant, ActivityDifficulty } from '../../interfaces';
-import { TagDropdown } from '../TagDropdown/TagDropdown';
-import * as S from './NewCardForm.styles';
-import { ParticipantsDropdown } from '../ParticipantsDropdown/ParticipantsDropdown';
-import { Modal } from '@app/components/common/Modal/Modal';
-import { Col, Row } from 'antd';
-import { Button } from '@app/components/common/buttons/Button/Button';
-import { useNavigate } from 'react-router-dom';
-import { TextArea } from '@app/components/common/inputs/Input/Input';
-import { Select, Option } from '@app/components/common/selects/Select/Select';
-import { InputNumber } from '@app/components/common/inputs/InputNumber/InputNumber';
-import { PlusOutlined } from '@ant-design/icons';
-import * as s from '../../AddCardLink/AddCardLink.styles';
-import { AddCardLink } from '../../AddCardLink/AddCardLink';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React, { useMemo, useState, useContext, useEffect } from "react";
+import { BaseButtonsForm } from "@app/components/common/forms/BaseButtonsForm/BaseButtonsForm";
+import { Input, Form, Upload } from "antd";
+import { useTranslation } from "react-i18next";
+import {
+  CardState,
+  Tag,
+  Participant,
+  ActivityDifficulty,
+  ActivityTechnique,
+} from "../../interfaces";
+import { TagDropdown } from "../TagDropdown/TagDropdown";
+import * as S from "./NewCardForm.styles";
+import { ParticipantsDropdown } from "../ParticipantsDropdown/ParticipantsDropdown";
+import { Modal } from "@app/components/common/Modal/Modal";
+import { Col, Row } from "antd";
+import { Button } from "@app/components/common/buttons/Button/Button";
+import { useNavigate } from "react-router-dom";
+import { TextArea } from "@app/components/common/inputs/Input/Input";
+import { Select, Option } from "@app/components/common/selects/Select/Select";
+import { InputNumber } from "@app/components/common/inputs/InputNumber/InputNumber";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import * as s from "../../AddCardLink/AddCardLink.styles";
+import { AddCardLink } from "../../AddCardLink/AddCardLink";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { httpApi } from "@app/api/http.api";
+import { Activity } from "@app/store/slices/activitySlice";
+import { Explore } from "./Explore";
+import styled from "styled-components";
+import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
+import { UploadChangeParam } from "antd/es/upload";
+import { Values } from "@app/components/common/charts/Legend/Legend.styles";
 
-export const formInputs = [
+const formInputs = [
   {
-    title: 'kanban.title',
-    label: 'Title',
-    name: 'activity_title',
+    title: "kanban.title",
+    label: "Title",
+    name: "activity_title",
   },
   {
     title: 'Objectives',
@@ -123,15 +136,29 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
     'code-block',
   ];
 
+  const Container = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1rem;
+  `;
+
   const [selectedTags, setSelectedTags] = useState<ActivityDifficulty[]>([]);
-  const [selectedParticipants, setSelectedParticipants] = useState<Participant[]>([]);
+  const [selectedParticipants, setSelectedParticipants] = useState<
+    Participant[]
+  >([]);
   const [isLoading, setLoading] = useState(false);
 
   const [isExploreOpen, setExploreOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isActivityOpen, setIsActivityOpen] = useState(true);
-  const [modalTitle, setModal] = useState('Explore existing activities or add a new one');
+  const [isExpActOpen, setIsExpActOpen] = useState(true);
+  const [isActivityOpen, setIsActivityOpen] = useState(false);
+  const [modalTitle, setModal] = useState(
+    "Explore existing activities or add a new one"
+  );
   const [isFieldsChanged, setFieldsChanged] = useState(false);
+
+  const [activities, setActivities] = useState<Activity[]>()
+  const [file, setFile] = useState<File>()
   const formItemLayout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 24 },
@@ -149,16 +176,33 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
     }, 1000);
   };
 
+  const add = (activity:CardState) => {
+    console.log(activity)
+    onAdd(activity)
+  }
+  
+  
+
+  useEffect(()=>{
+    httpApi.get('http://localhost:8000/activity/')
+    .then((resp)=>{
+      setActivities(resp.data);
+    })
+    .catch((err)=>{
+      console.log(err.message)
+    })
+  },[])
+
   const formItems = formInputs.map((item, index) => {
     const { label, name } = item;
-    if (name === 'activity_method') {
+    if (name === "activity_method") {
       return (
         <>
           <BaseButtonsForm.Item
             name="activity_method"
             label="Method"
             hasFeedback
-            rules={[{ message: 'you have to choose an activity method' }]}
+            rules={[{ message: "you have to choose an activity method" }]}
           >
             <Select width={100}>
               <Option value="Presential">Presential</Option>
@@ -178,7 +222,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
             hasFeedback
             rules={[{ required: true, message: 'you must choose at least one need' }]}
           >
-            <Select width={100}>
+            <Select  mode="multiple" width={100}>
               <Option value="Business Simulation" key={1}>
                 Business Simulation
               </Option>
@@ -209,14 +253,14 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
         </>
       );
     }
-    if (name === 'activity_difficulty') {
+    if (name === "activity_difficulty") {
       return (
         <>
           <TagDropdown selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
         </>
       );
     }
-    if (name === 'activity_duration') {
+    if (name === "activity_duration") {
       return (
         <>
           <BaseButtonsForm.Item label="Duration">
@@ -229,7 +273,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
         </>
       );
     }
-    if (name === 'activity_needs') {
+    if (name === "activity_needs") {
       return (
         <>
           <BaseButtonsForm.Item
@@ -299,27 +343,34 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
         open={isModalOpen}
         onOk={(e) => {
           e.stopPropagation();
+          setIsExpActOpen(true);
           setIsModalOpen(false);
-          setIsActivityOpen(true);
+          setIsActivityOpen(false);
+          setExploreOpen(false);
+          setModal("Explore existing activities or add a new one");
         }}
         onCancel={(e) => {
           e.stopPropagation();
+          setIsExpActOpen(true);
           setIsModalOpen(false);
-          setIsActivityOpen(true);
+          setIsActivityOpen(false);
+          setExploreOpen(false);
+          setModal("Explore existing activities or add a new one");
         }}
         closable={true}
         mask={true}
         maskClosable={false}
         footer={<div></div>}
       >
-        {isActivityOpen ? (
+        {isExpActOpen ? (
           <Row>
             <Col span={4}></Col>
             <Col>
               <Button
                 onClick={() => {
-                  setIsActivityOpen(false);
-                  setModal('Create a new activity');
+                  setIsActivityOpen(true);
+                  setIsExpActOpen(false);
+                  setModal("Create a new activity");
                 }}
               >
                 Add Activity
@@ -327,25 +378,47 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
             </Col>
             <Col span={5}></Col>
             <Col>
-              <Button onClick={() => setExploreOpen(true)}>Explore Library </Button>
+              <Button
+                onClick={() => {
+                  setExploreOpen(true);
+                  setIsExpActOpen(false);
+                  setModal("Explore activities");
+                }}
+              >
+                Explore Library{" "}
+              </Button>
             </Col>
           </Row>
-        ) : (
+        ) : isActivityOpen ? (
           <BaseButtonsForm
             {...formItemLayout}
             isFieldsChanged
             onFieldsChange={() => setFieldsChanged(true)}
             name="addCard"
-            footer={<S.FooterButtons loading={isLoading} size="small" onCancel={onCancel} />}
+            footer={
+              <S.FooterButtons
+                loading={isLoading}
+                size="small"
+                onCancel={onCancel}
+              />
+            }
             onFinish={onFinish}
           >
             {formItems}
-            {/* <ParticipantsDropdown
-                selectedParticipants={selectedParticipants}
-                setSelectedParticipants={setSelectedParticipants}
-              />   */}
+            
           </BaseButtonsForm>
+        ) : (
+          <Container>
+            {
+              activities?.map((activity)=>{
+                return (
+                  <Explore key={activity.id}  activity={activity} add={()=>add(activity)} />
+                )
+              })
+            }
+          </Container>
         )}
+        {}
       </Modal>
       <PlusOutlined />
     </s.AddCardWrapper>

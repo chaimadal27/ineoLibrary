@@ -23,7 +23,7 @@ export interface ActivityModel {
   id:string | number;
   activity_title:string;
   activity_method:string;
-  activity_technique:string;
+  activity_technique:string[];
   activity_difficulty:string;
   activity_duration:number|string;
   activity_objectives:string;
@@ -32,4 +32,8 @@ export interface ActivityModel {
   activity_variations:string;
   activity_description:string;
   created_at:string;
+}
+
+export interface ActivityTechnique {
+  technique:string
 }

@@ -12,7 +12,7 @@ interface SiderLogoProps {
   toggleSider: () => void;
 }
 export const SiderLogo: React.FC<SiderLogoProps> = ({ isSiderCollapsed, toggleSider }) => {
-  const { tabletOnly } = useResponsive();
+  const { tabletOnly, isDesktop } = useResponsive();
 
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -21,18 +21,18 @@ export const SiderLogo: React.FC<SiderLogoProps> = ({ isSiderCollapsed, toggleSi
   return (
     <S.SiderLogoDiv>
       <S.SiderLogoLink to="/">
-        <img src={image} width={200} height={60} />
+        <img src={image} width={150} height={50} />
         {/* <S.BrandSpan>Facilitation Library</S.BrandSpan> */}
       </S.SiderLogoLink>
-      {tabletOnly && (
+      
         <S.CollapseButton
           shape="circle"
-          size="small"
+          size="middle"
           $isCollapsed={isSiderCollapsed}
           icon={<RightOutlined rotate={isSiderCollapsed ? 0 : 180} />}
           onClick={toggleSider}
         />
-      )}
+   
     </S.SiderLogoDiv>
   );
 };

@@ -7,12 +7,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
-
-
-
-
+# TODO: change allowed hosts
 SECRET_KEY = os.getenv('SECRET_KEY')
-
 
 DEBUG = True
 
@@ -32,12 +28,13 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'multiselectfield',
+    # 'multiupload',
     # facilitation library apps
     'user',
     'workshop',
     'activity',
     'session',
-    # mixins
+    'workshop_attachement',
     'mixins',
 ]
 
@@ -75,7 +72,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DB_NAME'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
@@ -112,10 +109,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ADDITIONS
-AUTH_USER_MODEL='user.User'
-CORS_ALLOW_ALL_ORIGINS=True
+AUTH_USER_MODEL = 'user.User'
+CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
-        'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }

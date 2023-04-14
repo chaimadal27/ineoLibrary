@@ -16,11 +16,6 @@ const initialState:WorkshopsData = {
     singleWorkshop:<WorkshopModel>{}
 }
 
-interface pp {
-    workshop:Workshop,
-    id:number
-}
-
 
 export const fetchWorkshops = createAsyncThunk('get_workshops', async(payload, { dispatch })=>{
    return getWorkshops()
@@ -55,10 +50,8 @@ export const workshopSlice = createSlice({
         })
 
         builder.addCase(createWorkshop.fulfilled,(state, payload)=>{
-
         })
         builder.addCase(patchWorkshop.fulfilled, (state, payload)=>{
-            
         })
     }
 })

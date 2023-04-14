@@ -18,7 +18,7 @@ export const NftCard: React.FC<Workshops> = ({ workshop }) => {
 
 
   const handleClick = () => {
-    navigate(`/apps/kanban/${id.toString()}`, {state:{data:workshop}})
+    navigate(`/apps/session/${id.toString()}`, {state:{data:workshop}})
   }
 
 

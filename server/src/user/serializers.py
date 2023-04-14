@@ -8,17 +8,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
         read_only_fields = ['id']
-        extra_kwargs={
-                'password':{'write_only':True}
+        extra_kwargs = {
+            'password': {'write_only': True}
         }
-    
+
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         permission_data = validated_data.pop('user_permissions', None)
         groups_data = validated_data.pop('groups', None)
         instance = self.Meta.model(**validated_data)
         if permission_data:
-            permissions = Permission.objects.filter(codename__in = permission_data).all()
+            permissions = Permission.objects.filter(
+                codename__in=permission_data).all()
             instance.user_permissions.set(permissions)
         if groups_data:
             instance.set_groups(groups_data)
@@ -33,7 +34,8 @@ class UserSerializer(serializers.ModelSerializer):
         groups_data = validated_data.pop('groups', None)
         instance = self.Meta.model(**validated_data)
         if permission_data:
-            permissions = Permission.objects.filter(codename__in = permission_data).all()
+            permissions = Permission.objects.filter(
+                codename__in=permission_data).all()
             instance.user_permissions.set(permissions)
         if groups_data:
             instance.set_groups(groups_data)

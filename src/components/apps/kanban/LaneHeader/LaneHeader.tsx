@@ -15,21 +15,22 @@ interface LaneHeaderProps {
 export const LaneHeader: React.FC<LaneHeaderProps> = ({
   updateTitle,
   onDoubleClick,
-  editLaneTitle = true,
+  editLaneTitle = false,
   session_title,
   style,
   cards,
 }) => {
-  const numberOfCards = useMemo(() => (cards?.length ? `${cards.length}` : ''), [cards?.length]);
+  const numberOfCards = useMemo(() => (cards?.length ? `` : ''), [cards?.length]);
   return (
     <S.Header onDoubleClick={onDoubleClick} editLaneTitle={editLaneTitle} style={style}>
       <S.Title>
+        
         {editLaneTitle ? (
           <InlineInput value={session_title} border placeholder={session_title} resize="vertical" onSave={updateTitle} />
         ) : (
           <>
             {session_title}
-            {cards.length ? <S.Dot>·</S.Dot> : ''}
+            {/* {cards.length ? <S.Dot>·</S.Dot> : ''} */}
             {numberOfCards}
           </>
         )}

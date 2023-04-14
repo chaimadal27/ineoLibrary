@@ -16,7 +16,9 @@ export interface ActivityDifficulty {
   bgColor: 'error' | 'warning' | 'success';
 }
 
-
+export interface ActivityTechnique {
+  technique:string
+}
 
 export interface CardState {
   id?: number | string;

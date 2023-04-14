@@ -10,6 +10,7 @@ import {
   Tag as ITag,
   Participant as IParticipant,
   ActivityDifficulty as Difficulty,
+  ActivityTechnique,
 } from '@app/components/apps/kanban/interfaces';
 import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
 import { Select, Option } from '@app/components/common/selects/Select/Select';
@@ -20,6 +21,8 @@ import { Modal } from '@app/components/common/Modal/Modal';
 import * as s from './../newCardForm/NewCardForm/NewCardForm.styles';
 import { InputNumber } from '@app/components/common/inputs/InputNumber/InputNumber';
 import { toolbarOptions } from '../newCardForm/NewCardForm/NewCardForm';
+import { httpApi } from '@app/api/http.api';
+import { notificationController } from '@app/controllers/notificationController';
 
 interface CardProps {
   style: CSSStyleSheet;
@@ -54,16 +57,11 @@ const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onReview, ...props 
 
   return (
     <S.CardMenu selectable={true} {...props}>
-      {/* <S.MenuItem key="2" onClick={onEdit}>
-        Edit
-      </S.MenuItem> */}
-
       <S.MenuItem key="1" onClick={onReview}>
         Review
       </S.MenuItem>
-
       <S.MenuItem key="2" onClick={onDelete}>
-        {t('common.delete')}
+        Delete
       </S.MenuItem>
     </S.CardMenu>
   );
@@ -111,8 +109,15 @@ export const Card: React.FC<CardProps> = ({
     onChange({ ...card, id });
   };
 
-  const onDeleteCard = () => {
-    onDelete();
+  const onDeleteCard = (id:number | string | undefined) => {
+    httpApi.delete(`http://localhost:8000/activity/${id}/`)
+    .then(()=>{
+      notificationController.success({message:'Activity deleted successfully'})
+      onDelete();
+    })
+    .catch((err)=>{
+      notificationController.error({message:err.message})
+    })
   };
 
   const updateTags = (tags: ITag[]) => {
@@ -224,7 +229,7 @@ export const Card: React.FC<CardProps> = ({
         activity_method: values.activity_method || isUpdated.activity_method,
         activity_technique: values.activity_technique || isUpdated.activity_technique,
         activity_needs: values.activity_needs || isUpdated.activity_needs,
-        activity_difficulty: selectedTags,
+        activity_difficulty: selectedTags
       });
       console.log('values', values);
       console.log('Updated', isUpdated);
@@ -248,6 +253,7 @@ export const Card: React.FC<CardProps> = ({
   const handleNeedsChange = (value: string) => {
     setIsUpdated({ ...isUpdated, activity_needs: value });
   };
+
 
   const formItems = formInputs.map((item, index) => {
     const { label, name, value } = item;
@@ -483,7 +489,12 @@ export const Card: React.FC<CardProps> = ({
                         }}
                       >
                         {' '}
-                        <EditPopover onDelete={onDeleteCard} onReview={onReviewCard} />{' '}
+                        <EditPopover
+                          onDelete={()=>onDeleteCard(id)}
+                          
+                          onReview={onReviewCard}
+                          
+                        />{' '}
                       </div>
                     }
                     placement="bottomRight"
@@ -568,7 +579,7 @@ export const Card: React.FC<CardProps> = ({
               {/* <ReactQuill
                   style={{ zIndex: 1, overflow: 'visible', position: 'relative' }}
                   theme="bubble"
-                  value={activity_description}
+                  value={activity_description?.toString()}
                   onChange={(value: string) => updateCard({ activity_description: value })}
                 /> */}
               <ReactQuill theme="bubble" value={activity_description} className="ql-editor-Des" readOnly={true} />

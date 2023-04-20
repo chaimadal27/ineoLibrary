@@ -30,13 +30,13 @@ export const RecentActivity: React.FC = () => {
     getActivities().then((newActivity) => setActivity(activity.concat(newActivity)));
   };
 
-  useEffect(() => {
-    if (filters.status.length > 0) {
-      setFilteredActivity(activity.filter((item) => filters.status.some((filter) => filter === item.status)));
-    } else {
-      setFilteredActivity(activity);
-    }
-  }, [filters.status, activity]);
+  // useEffect(() => {
+  //   if (filters.status.length > 0) {
+  //     setFilteredActivity(activity.filter((item) => filters.status.some((filter) => filter === item.status)));
+  //   } else {
+  //     setFilteredActivity(activity);
+  //   }
+  // }, [filters.status, activity]);
 
   return (
     <Row gutter={[30, 0]}>

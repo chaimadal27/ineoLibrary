@@ -1,3 +1,6 @@
+import { kanbanDifficulty, KanbanTags } from "@app/constants/kanbanTags";
+const { high, medium, low } = kanbanDifficulty;
+
 export interface WorkshopModel {
   id: string | number;
   workshop_title:string;
@@ -5,7 +8,7 @@ export interface WorkshopModel {
   target_skills:string;
   duration:number|string;
   workshop_method:string;
-  // workshop_image:string;
+  workshop_image:string;
   workshop_description: string;
   created_at:string;
   updated_at:string;
@@ -24,7 +27,7 @@ export interface ActivityModel {
   activity_title:string;
   activity_method:string;
   activity_technique:string[];
-  activity_difficulty:string;
+  activity_difficulty:KanbanTags[];
   activity_duration:number|string;
   activity_objectives:string;
   activity_needs:string;

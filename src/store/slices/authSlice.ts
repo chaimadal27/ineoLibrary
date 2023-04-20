@@ -14,7 +14,7 @@ import {
   setNewPassword,
 } from '@app/api/auth.api';
 import { setUser } from '@app/store/slices/userSlice';
-import { deleteToken, deleteUser, persistToken, readToken, testUser } from '@app/services/localStorage.service';
+import { deleteToken, deleteUser, persistToken, readToken } from '@app/services/localStorage.service';
 import { UserModel } from '@app/domain/UserModel';
 
 export interface AuthSlice {

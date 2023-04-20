@@ -5,18 +5,19 @@ import { LaneHeader } from "../LaneHeader/LaneHeader";
 import { AddCardLink } from "../AddCardLink/AddCardLink";
 import { NewLaneSection } from "../NewLaneSection/NewLaneSection";
 import { NewLaneForm } from "../NewLaneForm/NewLaneForm";
-import { useAppDispatch, useAppSelector } from "@app/hooks/reduxHooks";
+// import { useAppDispatch } from "@app/hooks/reduxHooks";
 import { BORDER_RADIUS } from "@app/styles/themes/constants";
 import { useLocation } from "react-router-dom";
-import { getOneWorkshop, patchWorkshop } from "@app/store/slices/workshopSlice";
+// import { getOneWorkshop, patchWorkshop } from "@app/store/slices/workshopSlice";
 import { notificationController } from "@app/controllers/notificationController";
 import { ActivityModel } from "@app/domain/WorkshopModel";
-import { Workshop } from "@app/api/workshop.api";
+// import { Workshop } from "@app/api/workshop.api";
+import { Workshop } from "@app/store/slices/workshopSlice";
 import { BaseButtonsForm } from "@app/components/common/forms/BaseButtonsForm/BaseButtonsForm";
 import { Input } from "@app/components/common/inputs/Input/Input";
 import { Select, Option } from "@app/components/common/selects/Select/Select";
 import { InputNumber } from "@app/components/common/inputs/InputNumber/InputNumber";
-import { Collapse, Panel } from "@app/components/common/Collapse/Collapse";
+import { Panel } from "@app/components/common/Collapse/Collapse";
 import * as s from "@app/pages/uiComponentsPages//UIComponentsPage.styles";
 import { Upload, Button, Col, Row } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
@@ -34,13 +35,13 @@ interface LaneType {
 
 export const KanbanNew: React.FC = () => {
   const location = useLocation();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const [lanes, setLanes] = useState<Workshop>(location.state?.data);
   const [workshop, setWorkshop] = useState<Workshop>(location.state?.data);
   const [isFieldsChanged, setIsFieldChanged] = useState(false);
-  const [shouldSubmit, setShouldSubmit] = useState(false);
-  const [currentWorkshop, setCurrentWorkshop] = useState<Workshop | null>(null);
+  // const [shouldSubmit, setShouldSubmit] = useState(false);
+  // const [currentWorkshop, setCurrentWorkshop] = useState<Workshop | null>(null);
   const [workshopImage, setWorkshopImage] = useState<File>();
   const [workshopAttachements, setWorkshopAttachements] = useState<File>();
   const [isLoading, setLoading] = useState(false);
@@ -172,17 +173,18 @@ export const KanbanNew: React.FC = () => {
       })
       .catch((err) => notificationController.error({ message: err.message }));
   };
-
+  // eslint-disable-next-line
   const handleImageChange = (info: UploadChangeParam<any>) => {
     console.log(info.file);
     setWorkshopImage(info.file);
   };
-
+  // eslint-disable-next-line
   const handleAttachementsChange = (info: UploadChangeParam<any>) => {
     setWorkshopAttachements(info.file);
   }
 
   const handleCustomRequest = (options: RcCustomRequestOptions) => {
+    console.log(options)
   };
 
   useEffect(() => {
@@ -200,7 +202,7 @@ export const KanbanNew: React.FC = () => {
             <s.CollapseWrapper defaultActiveKey="2">
               <Panel header="Workshop details" key="1">
                 <BaseButtonsForm
-                  isFieldsChanged={isFieldsChanged}
+                  isFieldsChanged
                   onFieldsChange={() => setIsFieldChanged(true)}
                   loading={isLoading}
                   name="updateWorkshop"

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Row } from 'antd';
 import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
@@ -9,8 +9,8 @@ import { NicknameItem } from '@app/components/profile/profileCard/profileFormNav
 import { SexItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/SexItem/SexItem';
 import { BirthdayItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/BirthdayItem/BirthdayItem';
 import { LanguageItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/LanguageItem/LanguageItem';
-import { PhoneItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/PhoneItem/PhoneItem';
-import { EmailItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/EmailItem/EmailItem';
+// import { PhoneItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/PhoneItem/PhoneItem';
+// import { EmailItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/EmailItem/EmailItem';
 import { CountriesItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/CountriesItem/CountriesItem';
 import { CitiesItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/CitiesItem/CitiesItem';
 import { ZipcodeItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/ZipcodeItem/ZipcodeItem';
@@ -18,8 +18,8 @@ import { AddressItem } from '@app/components/profile/profileCard/profileFormNav/
 import { WebsiteItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/WebsiteItem/WebsiteItem';
 import { SocialLinksItem } from '@app/components/profile/profileCard/profileFormNav/nav/PersonalInfo/SocialLinksItem/SocialLinksItem';
 import { CreditCard } from '@app/components/profile/profileCard/profileFormNav/nav/payments/paymentMethod/paymentForm/interfaces';
-import { useAppSelector } from '@app/hooks/reduxHooks';
-import { Dates } from '@app/constants/Dates';
+// import { useAppSelector } from '@app/hooks/reduxHooks';
+// import { Dates } from '@app/constants/Dates';
 import { notificationController } from '@app/controllers/notificationController';
 
 interface PersonalInfoFormValues {
@@ -42,57 +42,57 @@ interface PersonalInfoFormValues {
   email: string;
 }
 
-const initialPersonalInfoValues: PersonalInfoFormValues = {
-  firstName: '',
-  lastName: '',
-  nickName: '',
-  sex: undefined,
-  birthday: undefined,
-  language: undefined,
-  phone: '',
-  email: '',
-  country: undefined,
-  city: undefined,
-  address1: '',
-  address2: '',
-  zipcode: '',
-  website: '',
-  twitter: '',
-  linkedin: '',
-  facebook: '',
-};
+// const initialPersonalInfoValues: PersonalInfoFormValues = {
+//   firstName: '',
+//   lastName: '',
+//   nickName: '',
+//   sex: undefined,
+//   birthday: undefined,
+//   language: undefined,
+//   phone: '',
+//   email: '',
+//   country: undefined,
+//   city: undefined,
+//   address1: '',
+//   address2: '',
+//   zipcode: '',
+//   website: '',
+//   twitter: '',
+//   linkedin: '',
+//   facebook: '',
+// };
 
 export const PersonalInfo: React.FC = () => {
-  const user = useAppSelector((state) => state.user.user);
+  // const user = useAppSelector((state) => state.user.user);
 
   const [isFieldsChanged, setFieldsChanged] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
-  const userFormValues = useMemo(
-    () =>
-      user
-        ? {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email.name,
-            phone: user.phone.number,
-            nickname: user.userName,
-            sex: user.sex,
-            birthday: Dates.getDate(user.birthday),
-            language: user.lang,
-            country: user.country,
-            city: user.city,
-            address1: user.address1,
-            address2: user?.address2,
-            zipcode: user.zipcode,
-            website: user?.website,
-            twitter: user?.socials?.twitter,
-            linkedin: user?.socials?.linkedin,
-            facebook: user?.socials?.facebook,
-          }
-        : initialPersonalInfoValues,
-    [user],
-  );
+  // const userFormValues = useMemo(
+  //   () =>
+  //     user
+  //       ? {
+  //           firstName: user.firstName,
+  //           lastName: user.lastName,
+  //           email: user.email.name,
+  //           phone: user.phone.number,
+  //           nickname: user.userName,
+  //           sex: user.sex,
+  //           birthday: Dates.getDate(user.birthday),
+  //           language: user.lang,
+  //           country: user.country,
+  //           city: user.city,
+  //           address1: user.address1,
+  //           address2: user?.address2,
+  //           zipcode: user.zipcode,
+  //           website: user?.website,
+  //           twitter: user?.socials?.twitter,
+  //           linkedin: user?.socials?.linkedin,
+  //           facebook: user?.socials?.facebook,
+  //         }
+  //       : initialPersonalInfoValues,
+  //   [user],
+  // );
 
   const [form] = BaseButtonsForm.useForm();
 
@@ -118,7 +118,7 @@ export const PersonalInfo: React.FC = () => {
         form={form}
         name="info"
         loading={isLoading}
-        initialValues={userFormValues}
+        // initialValues={userFormValues}
         isFieldsChanged={isFieldsChanged}
         setFieldsChanged={setFieldsChanged}
         onFieldsChange={() => setFieldsChanged(true)}
@@ -162,11 +162,11 @@ export const PersonalInfo: React.FC = () => {
           </Col>
 
           <Col xs={24} md={12}>
-            <PhoneItem verified={user?.phone.verified} />
+            {/* <PhoneItem verified={user?.phone.verified} /> */}
           </Col>
 
           <Col xs={24} md={12}>
-            <EmailItem verified={user?.email.verified} />
+            {/* <EmailItem verified={user?.email.verified} /> */}
           </Col>
 
           <Col span={24}>

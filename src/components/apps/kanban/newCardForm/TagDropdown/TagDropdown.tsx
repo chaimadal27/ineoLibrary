@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { Dropdown } from '@app/components/common/Dropdown/Dropdown';
-import { Tag as ITag, ActivityDifficulty as Difficulty } from '../../interfaces';
+import { ActivityDifficulty as Difficulty } from '../../interfaces';
 import { kanbanDifficulty } from 'constants/kanbanTags';
 import * as S from './TagDropdown.styles';
 import { Tag } from 'components/common/Tag/Tag';
@@ -13,7 +13,7 @@ interface TagDropdownProps {
 }
 
 export const TagDropdown: React.FC<TagDropdownProps> = ({ selectedTags=[{id: "HIGH", activity_difficulty: "High", bgColor: "error"}], setSelectedTags }) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const kanbanTagData = Object.values(kanbanDifficulty);
 

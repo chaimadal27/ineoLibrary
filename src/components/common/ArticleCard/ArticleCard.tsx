@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dates } from '@app/constants/Dates';
 import { Avatar, Image } from 'antd';
-import { Tag, ITag } from '../Tag/Tag';
+import { ITag } from '../Tag/Tag';
 import * as S from './ArticleCard.styles';
 
 interface ArticleCardProps {
@@ -44,9 +44,10 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
       {!!tags?.length && (
         <S.TagsWrapper>
-          {tags.map((tag) => (
-            <Tag key={tag.bgColor} title={tag.title} bgColor={tag.bgColor} />
-          ))}
+          {/* {tags.map((tag) => (
+            <></>
+            // <Tag key={tag.bgColor} title={tag.title} bgColor={tag.bgColor} />
+          ))} */}
         </S.TagsWrapper>
       )}
     </S.Wrapper>

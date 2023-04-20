@@ -6,7 +6,7 @@ import { TreatmentPanel } from './TreatmentPanel';
 import { AppDate, Dates } from 'constants/Dates';
 import { Col, Row } from 'antd';
 import { DashboardCard } from '../DashboardCard/DashboardCard';
-import { CalendarEvent, getUserCalendar } from 'api/calendar.api';
+import { CalendarEvent } from 'api/calendar.api';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Button } from '../../common/buttons/Button/Button';
@@ -22,8 +22,9 @@ export const TreatmentCard: React.FC = () => {
   const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
-    user && getUserCalendar(user?.id).then((res) => setCalendar(res));
-  }, [user]);
+    // user && getUserCalendar(user?.id).then((res) => setCalendar(res));
+    setCalendar([...calendar, {date:1, doctor:1}])
+  }, [user,calendar]);
 
   const { i18n, t } = useTranslation();
 

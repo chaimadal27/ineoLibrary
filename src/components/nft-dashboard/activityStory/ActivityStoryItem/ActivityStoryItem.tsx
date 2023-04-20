@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Col, Row } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { activityStatuses } from '@app/constants/config/activityStatuses';
+// import { useTranslation } from 'react-i18next';
+// import { activityStatuses } from '@app/constants/config/activityStatuses';
 import { Dates } from '@app/constants/Dates';
 import * as S from './ActivityStoryItem.styles';
 import { WorkshopModel } from '@app/domain/WorkshopModel';
 
 
-export const ActivityStoryItem: React.FC<WorkshopModel> = ({id, workshop_title, uses, target_skills, duration, workshop_method, workshop_image, workshop_description, created_at}) => {
-  const { t } = useTranslation();
+export const ActivityStoryItem: React.FC<WorkshopModel> = ({workshop_title, workshop_image, created_at}) => {
+  // const { t } = useTranslation();
   
 
   return (

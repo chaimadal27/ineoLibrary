@@ -1,10 +1,10 @@
 import { Post } from '../api/news.api';
-import { newsTags } from './newsTags';
+// import { newsTags } from './newsTags';
 
 const avatar1 = process.env.REACT_APP_ASSETS_BUCKET + '/avatars/avatar1.webp';
 const avatar2 = process.env.REACT_APP_ASSETS_BUCKET + '/avatars/avatar2.webp';
 
-const { health, covid } = newsTags;
+// const { health, covid } = newsTags;
 
 export const dashboardNews: Array<Post> = [
   {
@@ -14,7 +14,7 @@ export const dashboardNews: Array<Post> = [
     img: process.env.REACT_APP_ASSETS_BUCKET + '/med-news/Rectangle_440_1_ayb6yf.webp',
     avatarUrl: avatar1,
     author: 'Dr. Dan Reed',
-    tags: [health, covid],
+    // tags: [health, covid],
   },
   {
     title: 'Cancer therapies',
@@ -23,6 +23,6 @@ export const dashboardNews: Array<Post> = [
     img: process.env.REACT_APP_ASSETS_BUCKET + '/med-news/Rectangle_441_1_iq4y2p.webp',
     avatarUrl: avatar2,
     author: 'Jordan Howard',
-    tags: [health],
+    // tags: [health],
   },
 ];

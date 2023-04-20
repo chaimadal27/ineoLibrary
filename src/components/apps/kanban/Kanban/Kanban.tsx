@@ -5,10 +5,11 @@ import { LaneHeader } from "../LaneHeader/LaneHeader";
 import { AddCardLink } from "../AddCardLink/AddCardLink";
 import { NewLaneSection } from "../NewLaneSection/NewLaneSection";
 import { NewLaneForm } from "../NewLaneForm/NewLaneForm";
-import { useAppDispatch } from "@app/hooks/reduxHooks";
+// import { useAppDispatch } from "@app/hooks/reduxHooks";
 import { BORDER_RADIUS } from "@app/styles/themes/constants";
 import { ActivityModel } from "@app/domain/WorkshopModel";
-import { Workshop } from "@app/api/workshop.api";
+// import { Workshop } from "@app/api/workshop.api";
+import { Workshop } from "@app/store/slices/workshopSlice";
 import { BaseButtonsForm } from "@app/components/common/forms/BaseButtonsForm/BaseButtonsForm";
 import { Input } from "@app/components/common/inputs/Input/Input";
 import { Select, Option } from "@app/components/common/selects/Select/Select";
@@ -17,15 +18,18 @@ import { InputNumber } from "@app/components/common/inputs/InputNumber/InputNumb
 import { Panel } from "@app/components/common/Collapse/Collapse";
 import * as s from "@app/pages/uiComponentsPages//UIComponentsPage.styles";
 import * as S from "./Kanban.styles";
-import { Upload, Button, Col, Row, UploadFile } from "antd";
+import { Upload, Button, Col, Row } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 import { UploadChangeParam } from "antd/es/upload";
 import { httpApi } from "@app/api/http.api";
 import TextArea from 'antd/lib/input/TextArea';
-interface WorkshopProps {
-  data: Workshop;
-}
+
+// import { kanbanDifficulty } from "@app/constants/kanbanTags";
+// const { high, medium, low } = kanbanDifficulty;
+// interface WorkshopProps {
+//   data: Workshop;
+// }
 
 interface LaneType {
   id: string;
@@ -33,15 +37,87 @@ interface LaneType {
   cards: ActivityModel[];
 }
 
-export const Kanban: React.FC<WorkshopProps> = ({ data }) => {
-  const [lanes, setLanes] = useState<Workshop>(data);
-  const [workshop, setWorkshop] = useState<Workshop>(data);
+export const Kanban: React.FC = () => {
+  const [lanes, setLanes] = useState<Workshop>({
+  id: '1',
+  workshop_title: 'Title',
+  uses: 'Business Creation',
+  target_skills: 'Computer Skills',
+  duration: 1,
+  workshop_image: 'string',
+  workshop_method: 'Online',
+  workshop_description: 'string',
+  lanes: [
+    {
+      id: '00000000-0000-0000-0000-000000000000',
+      session_title: 'Day 1',
+      cards: [
+        {
+         id:'00000000-0000-0000-0000-000000000000',
+          activity_title: 'activity title',
+          activity_method: 'Presential',
+          activity_technique: [
+            "Business simulation"
+          ],
+          activity_difficulty: [],
+          activity_duration: '2',
+          activity_objectives: 'activity objectives',
+          activity_needs: 'Metaplan cards',
+          activity_organization: 'activity organization',
+          activity_variations: 'activity variations',
+          activity_description:'activity description',
+          created_at: '2023-02-25T01:32:26.497858Z'
+        }
+      ]
+    }
+  ],
+  created_at: '2023-02-25T01:32:26.486721Z',
+  updated_at: '2023-02-25T01:32:26.486751Z',
+  deleted_at: 'null'
+});
+  const [workshop, setWorkshop] = useState<Workshop>({
+  id: '1',
+  workshop_title: 'Title',
+  uses: 'Business Creation',
+  target_skills: 'Computer Skills',
+  duration: 1,
+  workshop_image: 'string',
+  workshop_method: 'Online',
+  workshop_description: 'string',
+  lanes: [
+    {
+      id: '00000000-0000-0000-0000-000000000000',
+      session_title: 'Day 1',
+      cards: [
+        {
+         id:'00000000-0000-0000-0000-000000000000',
+          activity_title: 'activity title',
+          activity_method: 'Presential',
+          activity_technique: [
+            "Business simulation"
+          ],
+          activity_difficulty: [],
+          activity_duration: '2',
+          activity_objectives: 'activity objectives',
+          activity_needs: 'Metaplan cards',
+          activity_organization: 'activity organization',
+          activity_variations: 'activity variations',
+          activity_description:'activity description',
+          created_at: '2023-02-25T01:32:26.497858Z'
+        }
+      ]
+    }
+  ],
+  created_at: '2023-02-25T01:32:26.486721Z',
+  updated_at: '2023-02-25T01:32:26.486751Z',
+  deleted_at: 'null'
+});
   const [isFieldsChanged, setIsFieldChanged] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [workshopImage, setWorkshopImage] = useState<File>();
   const [workshopAttachements, setWorkshopAttachements] = useState<File>();
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const formItemLayout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 24 },
@@ -165,16 +241,17 @@ export const Kanban: React.FC<WorkshopProps> = ({ data }) => {
       })
       .catch((err) => notificationController.error({ message: err.message }));
   };
-
+  // eslint-disable-next-line
   const handleImageChange = (info: UploadChangeParam<any>) => {
     setWorkshopImage(info.file);
   };
 
-  
+  // eslint-disable-next-line
 const handleAttachementsChange = (info: UploadChangeParam<any>) => {
   setWorkshopAttachements(info.file);
 };
   const handleCustomRequest = (options: RcCustomRequestOptions) => {
+    console.log(options)
   };
 
   useEffect(() => {
@@ -182,7 +259,7 @@ const handleAttachementsChange = (info: UploadChangeParam<any>) => {
       handleSubmit();
       setLoading(false);
     }
-  }, [isLoading]);
+  }, [isLoading, handleSubmit]);
 
   return (
     <>
@@ -192,7 +269,7 @@ const handleAttachementsChange = (info: UploadChangeParam<any>) => {
             <s.CollapseWrapper defaultActiveKey="2">
               <Panel header="Workshop details" key="1">
                 <BaseButtonsForm
-                  isFieldsChanged={isFieldsChanged}
+                  isFieldsChanged
                   onFieldsChange={() => setIsFieldChanged(true)}
                   loading={isLoading}
                   name="updateWorkshop"

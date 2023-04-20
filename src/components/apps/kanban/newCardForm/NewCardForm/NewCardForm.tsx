@@ -1,36 +1,36 @@
-import React, { useMemo, useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BaseButtonsForm } from "@app/components/common/forms/BaseButtonsForm/BaseButtonsForm";
-import { Input, Form, Upload } from "antd";
-import { useTranslation } from "react-i18next";
+// import { Input, Form, Upload } from "antd";
+// import { useTranslation } from "react-i18next";
 import {
   CardState,
-  Tag,
-  Participant,
+  // Tag,
+  // Participant,
   ActivityDifficulty,
-  ActivityTechnique,
+  // ActivityTechnique,
 } from "../../interfaces";
 import { TagDropdown } from "../TagDropdown/TagDropdown";
 import * as S from "./NewCardForm.styles";
-import { ParticipantsDropdown } from "../ParticipantsDropdown/ParticipantsDropdown";
+// import { ParticipantsDropdown } from "../ParticipantsDropdown/ParticipantsDropdown";
 import { Modal } from "@app/components/common/Modal/Modal";
 import { Col, Row } from "antd";
 import { Button } from "@app/components/common/buttons/Button/Button";
-import { useNavigate } from "react-router-dom";
-import { TextArea } from "@app/components/common/inputs/Input/Input";
+// import { useNavigate } from "react-router-dom";
+// import { TextArea } from "@app/components/common/inputs/Input/Input";
 import { Select, Option } from "@app/components/common/selects/Select/Select";
 import { InputNumber } from "@app/components/common/inputs/InputNumber/InputNumber";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import * as s from "../../AddCardLink/AddCardLink.styles";
-import { AddCardLink } from "../../AddCardLink/AddCardLink";
+// import { AddCardLink } from "../../AddCardLink/AddCardLink";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { httpApi } from "@app/api/http.api";
 import { Activity } from "@app/store/slices/activitySlice";
 import { Explore } from "./Explore";
 import styled from "styled-components";
-import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
-import { UploadChangeParam } from "antd/es/upload";
-import { Values } from "@app/components/common/charts/Legend/Legend.styles";
+// import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
+// import { UploadChangeParam } from "antd/es/upload";
+// import { Values } from "@app/components/common/charts/Legend/Legend.styles";
 
 const formInputs = [
   {
@@ -86,7 +86,7 @@ const formInputs = [
 ];
 
 interface NewCardFormProps {
-  onAdd: (state: CardState) => void;
+  onAdd: (state: CardState | Activity) => void;
   onCancel: () => void;
 }
 
@@ -112,7 +112,7 @@ export const toolbarOptions = [
   ['clean'], // remove formatting button
 ];
 export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const formats = [
     'header',
@@ -143,12 +143,12 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
   `;
 
   const [selectedTags, setSelectedTags] = useState<ActivityDifficulty[]>([]);
-  const [selectedParticipants, setSelectedParticipants] = useState<
-    Participant[]
-  >([]);
+  // const [selectedParticipants, setSelectedParticipants] = useState<
+  //   Participant[]
+  // >([]);
   const [isLoading, setLoading] = useState(false);
 
-  const [isExploreOpen, setExploreOpen] = useState(false);
+  // const [isExploreOpen, setExploreOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpActOpen, setIsExpActOpen] = useState(true);
   const [isActivityOpen, setIsActivityOpen] = useState(false);
@@ -158,13 +158,13 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
   const [isFieldsChanged, setFieldsChanged] = useState(false);
 
   const [activities, setActivities] = useState<Activity[]>()
-  const [file, setFile] = useState<File>()
+  // const [file, setFile] = useState<File>()
   const formItemLayout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 24 },
   };
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const onFinish = (values: CardState) => {
     setLoading(true);
@@ -176,7 +176,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
     }, 1000);
   };
 
-  const add = (activity:CardState) => {
+  const add = (activity:Activity) => {
     console.log(activity)
     onAdd(activity)
   }
@@ -302,8 +302,9 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
     }
     if (name === 'activity_description') {
       return (
-        <BaseButtonsForm.Item label={'Description'} className="ql-editor-Description" name="activity_description">
+        <BaseButtonsForm.Item label={'Description'} className="ql-editor-Description" name="activity_description" key={index}>
           <ReactQuill
+            // key={index}
             formats={formats}
             modules={{
               toolbar: toolbarOptions,
@@ -346,7 +347,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
           setIsExpActOpen(true);
           setIsModalOpen(false);
           setIsActivityOpen(false);
-          setExploreOpen(false);
+          // setExploreOpen(false);
           setModal("Explore existing activities or add a new one");
         }}
         onCancel={(e) => {
@@ -354,7 +355,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
           setIsExpActOpen(true);
           setIsModalOpen(false);
           setIsActivityOpen(false);
-          setExploreOpen(false);
+          // setExploreOpen(false);
           setModal("Explore existing activities or add a new one");
         }}
         closable={true}
@@ -380,7 +381,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
             <Col>
               <Button
                 onClick={() => {
-                  setExploreOpen(true);
+                  // setExploreOpen(true);
                   setIsExpActOpen(false);
                   setModal("Explore activities");
                 }}

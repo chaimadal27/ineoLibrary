@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Row } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
@@ -8,9 +8,9 @@ import { ViewAll } from '@app/components/nft-dashboard/common/ViewAll/ViewAll';
 import { NftCard } from '@app/components/nft-dashboard/recently-added/nft-card/NftCard';
 import { useResponsive } from '@app/hooks/useResponsive';
 import * as S from './RecentlyAddedNft.styles';
-import { fetchWorkshops } from '@app/store/slices/workshopSlice'
+import { Workshop, fetchWorkshops } from '@app/store/slices/workshopSlice'
 import { useAppDispatch, useAppSelector } from '@app/hooks/reduxHooks';
-import { WorkshopModel } from '@app/domain/WorkshopModel';
+// import { WorkshopModel } from '@app/domain/WorkshopModel';
 
 export const RecentlyAddedNft: React.FC = () => {
   
@@ -19,21 +19,21 @@ export const RecentlyAddedNft: React.FC = () => {
   const { mobileOnly, isTablet } = useResponsive();
   const dispatch = useAppDispatch()
   
-  const workshops:WorkshopModel[] | undefined = useAppSelector((state)=>state.workshop.workshop)
+  const workshops:Workshop[] | undefined = useAppSelector((state)=>state.workshop.workshops)
 
   
 
 
   useEffect(() => {
     dispatch(fetchWorkshops())
-  }, []);
+  }, [dispatch]);
 
   const cards = useMemo(()=>{
     return {
       mobile: workshops?.map((workshop)=> <NftCard key={workshop.id.toString()} workshop={workshop} />),
       tablet: workshops?.map((workshop)=> <div key={workshop.id.toString()}><S.CardWrapper><NftCard key={workshop.id.toString()} workshop={workshop} /></S.CardWrapper></div>)
     }
-  },[workshops, t, mobileOnly, isTablet, useAppSelector])
+  },[workshops])
 
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,15 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ActivityStoryItem } from './ActivityStoryItem/ActivityStoryItem';
-import { UserActivity, getUserActivities } from '@app/api/activity.api';
+// import { UserActivity, getUserActivities } from '@app/api/activity.api';
 import * as S from './ActivityStory.styles';
 import { useAppSelector } from '@app/hooks/reduxHooks';
-import { WorkshopModel } from '@app/domain/WorkshopModel';
+// import { WorkshopModel } from '@app/domain/WorkshopModel';
+import { Workshop } from '@app/store/slices/workshopSlice';
 
 export const ActivityStory: React.FC = () => {
   // const [story, setStory] = useState<UserActivity[]>([]);
-  const workshops: WorkshopModel[] = useAppSelector((state)=>state.workshop.workshop)
+  const workshops: Workshop[] = useAppSelector((state)=>state.workshop.workshops)
 
   const { t } = useTranslation();
 
@@ -20,8 +21,8 @@ export const ActivityStory: React.FC = () => {
 
   const activityStory = useMemo(
     () =>
-      workshops.map((workshop) => (
-        <Col span={24}>
+      workshops.map((workshop, index) => (
+        <Col span={24} key={index}>
           <ActivityStoryItem key={workshop.id} {...workshop} />
         </Col>
       )),

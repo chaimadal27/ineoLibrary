@@ -39,11 +39,11 @@ export interface ActivityTechnique {
     technique:string
 }
 
-export const fetchActivities = createAsyncThunk('get_activities', async(payload, state)=>{
+export const fetchActivities = createAsyncThunk('get_activities', async()=>{
     return getActivities()
 })
 
-export const deleteActivity = createAsyncThunk('delete_activity', async(payload, state)=>{
+export const deleteActivity = createAsyncThunk('delete_activity', async()=>{
     return destroyActivity()
 })
 
@@ -64,7 +64,7 @@ export const activitySlice = createSlice({
             state.error = action.error.message ?? 'Unkown error'
        })
 
-       builder.addCase(deleteActivity.fulfilled, (state, action)=>{
+       builder.addCase(deleteActivity.fulfilled, (state)=>{
             state.status = 'idle'
        })
     }

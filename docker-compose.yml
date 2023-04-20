@@ -1,0 +1,61 @@
+version: '3.4'
+
+volumes:
+  local_postgres_data: {}
+
+services:
+  # database
+  gu_db:
+    image: postgres:15.2
+    restart: always
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data/
+      - ./docker-entrypoint-initdb.d/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+      # - ./entrypoint.sh:s/app/entrypoint.sh
+    environment:
+      POSTGRES_HOST: gu_db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: kiki
+      POSTGRES_USER: imaginos
+      POSTGRES_PASSWORD: ca
+    expose:
+      - '5432:5432'
+  # backend
+  django:
+    build:
+      context: ./server/
+      dockerfile: Dockerfile
+    volumes:
+      - ./server/src:/app/src
+    ports:
+      - '8000:8000'
+    depends_on:
+      - gu_db
+  # frontend
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - django
+  # database management
+  adminer:
+    image: adminer
+    ports:
+      - '8080:8080'
+    depends_on:
+      - gu_db
+
+  # nginx:
+  #   build:
+  #     context: ./.nginx
+  #     dockerfile: Dockerfile
+  #   # volumes:
+  #   #   - .:/app
+  #   # ports:
+  #   #   - '3050:80'
+  #   depends_on:
+  #     - react
+  #     - django

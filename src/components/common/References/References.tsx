@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './References.styles';
-import { FacebookOutlined, LinkedinOutlined, TwitterOutlined } from '@ant-design/icons';
+// import { FacebookOutlined, LinkedinOutlined, TwitterOutlined } from '@ant-design/icons';
 
 export const References: React.FC = () => {
   return (

@@ -1,16 +1,15 @@
-import React, { ChangeEvent, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+// import { useTranslation } from 'react-i18next';
 import { MoreOutlined } from '@ant-design/icons';
 import { Dropdown } from '@app/components/common/Dropdown/Dropdown';
 import { Button } from '@app/components/common/buttons/Button/Button';
-import { ParticipantsDropdown } from '@app/components/apps/kanban/newCardForm/ParticipantsDropdown/ParticipantsDropdown';
 import { TagDropdown } from '@app/components/apps/kanban/newCardForm/TagDropdown/TagDropdown';
 import {
   CardState,
-  Tag as ITag,
-  Participant as IParticipant,
+  // Tag as ITag,
+  // Participant as IParticipant,
   ActivityDifficulty as Difficulty,
-  ActivityTechnique,
+  
 } from '@app/components/apps/kanban/interfaces';
 import { BaseButtonsForm } from '@app/components/common/forms/BaseButtonsForm/BaseButtonsForm';
 import { Select, Option } from '@app/components/common/selects/Select/Select';
@@ -53,7 +52,7 @@ interface EditPopoverProps {
 }
 
 const EditPopover: React.FC<EditPopoverProps> = ({ onDelete, onReview, ...props }) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   return (
     <S.CardMenu selectable={true} {...props}>
@@ -89,7 +88,7 @@ export const Card: React.FC<CardProps> = ({
   // participants = [],
   // editable,
 }) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(true);
   // const [isEditable, setIsEditable] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -120,21 +119,21 @@ export const Card: React.FC<CardProps> = ({
     })
   };
 
-  const updateTags = (tags: ITag[]) => {
-    updateCard({ tags });
-  };
+  // const updateTags = (tags: ITag[]) => {
+  //   updateCard({ tags });
+  // };
 
-  const updateDifficulty = (activity_difficulty: Difficulty[]) => {
-    updateCard({ activity_difficulty });
-  };
+  // const updateDifficulty = (activity_difficulty: Difficulty[]) => {
+  //   updateCard({ activity_difficulty });
+  // };
 
-  const updateMethod = (tags: ITag[]) => {
-    updateCard({ tags });
-  };
+  // const updateMethod = (tags: ITag[]) => {
+  //   updateCard({ tags });
+  // };
 
-  const updateParticipants = (participants: IParticipant[]) => {
-    updateCard({ participants });
-  };
+  // const updateParticipants = (participants: IParticipant[]) => {
+  //   updateCard({ participants });
+  // };
 
   // const onEditCard = () => {
   //   setIsEditable(!isEditable);
@@ -222,7 +221,7 @@ export const Card: React.FC<CardProps> = ({
   const onFinish = (values: CardState) => {
     setLoading(true);
     setTimeout(() => {
-      setFieldsChanged(false);
+      setFieldsChanged(true);
       updateCard({
         ...values,
         ...isUpdated,
@@ -237,20 +236,20 @@ export const Card: React.FC<CardProps> = ({
       setLoading(false);
     }, 1000);
   };
-
-  const handleChange = (e: number) => {
+  // eslint-disable-next-line
+  const handleChange = (e: number | any) => {
     setIsUpdated({ ...isUpdated, activity_duration: e });
   };
-
-  const handleMethodChange = (value: string) => {
+  // eslint-disable-next-line
+  const handleMethodChange = (value: string | any) => {
     setIsUpdated({ ...isUpdated, activity_method: value });
   };
-
-  const handleTechniqueChange = (values: string[]) => {
+  // eslint-disable-next-line
+  const handleTechniqueChange = (values: string[] | any) => {
     setIsUpdated({ ...isUpdated, activity_technique: values });
   };
-
-  const handleNeedsChange = (value: string) => {
+  // eslint-disable-next-line
+  const handleNeedsChange = (value: string | any) => {
     setIsUpdated({ ...isUpdated, activity_needs: value });
   };
 
@@ -365,8 +364,9 @@ export const Card: React.FC<CardProps> = ({
 
     if (name === 'activity_description') {
       return (
-        <BaseButtonsForm.Item label={'Description'} className="ql-editor-Description2">
+        <BaseButtonsForm.Item label={'Description'} className="ql-editor-Description2" key={index}>
           <ReactQuill
+            // key={index}
             modules={{
               toolbar: toolbarOptions,
             }}
@@ -387,8 +387,9 @@ export const Card: React.FC<CardProps> = ({
     }
 
     return (
-      <BaseButtonsForm.Item label={label}>
+      <BaseButtonsForm.Item label={label} key={index}>
         <ReactQuill
+          // key={index}
           modules={{
             toolbar: toolbarOptions,
           }}

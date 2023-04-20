@@ -1,8 +1,8 @@
 import React, { ReactNode, useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RangeValue } from 'rc-picker/lib/interface.d';
-import { Tag, ITag } from '@app/components/common/Tag/Tag';
-import { AuthorValidator, TitleValidator, DatesValidator, TagsValidator } from '../Validator';
+import { ITag } from '@app/components/common/Tag/Tag';
+import { AuthorValidator, TitleValidator, DatesValidator } from '../Validator';
 import { useResponsive } from '@app/hooks/useResponsive';
 import { newsTags as defaultTags } from '@app/constants/newsTags';
 import { AppDate, Dates } from '@app/constants/Dates';
@@ -88,7 +88,7 @@ const Filter: React.FC<Filter> = ({
                 }}
               >
                 <S.PopoverCheckbox checked={selectedTagsIds.includes(tag.id)} />
-                <Tag title={tag.title} bgColor={tag.bgColor} />
+                {/* <Tag title={tag.title} bgColor={tag.bgColor} /> */}
               </S.TagPopoverLine>
             ))}
             <S.ClosePopoverWrapper>
@@ -104,11 +104,13 @@ const Filter: React.FC<Filter> = ({
       </Dropdown>
 
       {!!selectedTags.length && (
-        <S.TagsWrapper>
-          {selectedTags.map((tag) => (
-            <Tag key={tag.id} title={tag.title} bgColor={tag.bgColor} removeTag={() => onTagClick(tag)} />
-          ))}
-        </S.TagsWrapper>
+        ""
+        // <S.TagsWrapper>
+        //   {selectedTags.map((tag) => (
+        //     console.log(tag)
+        //     // <Tag key={tag.id} title={tag.title} bgColor={tag.bgColor} removeTag={() => onTagClick(tag)} />
+        //   ))}
+        // </S.TagsWrapper>
       )}
 
       <S.DateLabels>
@@ -183,14 +185,14 @@ export const NewsFilter: React.FC<NewsFilterProps> = ({ news, newsTags, children
           const enteredAuthor = author.toLowerCase();
           const postTitle = post.title.toLowerCase();
           const enteredTitle = title.toLowerCase();
-          const postTags = post.tags;
+          // const postTags = post.tags;
           const postDate = Dates.getDate(post.date);
 
           const fieldsValidators = [
             new AuthorValidator(postAuthor, enteredAuthor),
             new TitleValidator(postTitle, enteredTitle),
             new DatesValidator(postDate, dates),
-            new TagsValidator(postTags, selectedTags),
+            // new TagsValidator(postTags, selectedTags),
           ];
 
           return fieldsValidators.map((validator) => validator.validate()).every((i) => i);

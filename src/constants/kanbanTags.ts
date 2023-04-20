@@ -4,7 +4,7 @@ interface Tag {
   bgColor: 'error' | 'warning' | 'success';
 }
 
-interface KanbanTags {
+export interface KanbanTags {
   [key: string]: Tag;
 }
 

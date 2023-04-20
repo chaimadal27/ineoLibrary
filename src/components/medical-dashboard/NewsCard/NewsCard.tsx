@@ -20,7 +20,7 @@ export const NewsCard: React.FC = () => {
             description={advice.text}
             avatar={advice.avatarUrl}
             author={advice.author}
-            tags={advice.tags}
+            // tags={advice.tags}
           />
         ))}
       </S.Wrapper>

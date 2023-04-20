@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { Avatar } from '@app/components/common/Avatar/Avatar';
 import { WorkshopModel } from '@app/domain/WorkshopModel';
 import * as S from './TrendingCollection.styles';
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const TrendingCollection: React.FC<WorkshopModel> = (workshop) => {
 
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const navigate = useNavigate()
 
 

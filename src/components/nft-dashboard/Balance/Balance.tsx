@@ -14,12 +14,12 @@ export const Balance: React.FC = () => {
     btc_balance: 0,
   });
 
-  const userId = useAppSelector((state) => state.user.user?.id);
+  // const userId = useAppSelector((state) => state.user.user?.id);
   const { theme } = useAppSelector((state) => state.theme);
 
   useEffect(() => {
-    userId && getBalance(userId).then((res) => setBalance(res));
-  }, [userId]);
+    // userId && getBalance(userId).then((res) => setBalance(res));
+  }, []);
 
   const { t } = useTranslation();
 

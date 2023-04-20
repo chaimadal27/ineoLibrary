@@ -34,7 +34,7 @@ export const NewsFeed: React.FC = () => {
                 imgUrl={post.img}
                 author={post.author}
                 avatar={post.avatarUrl}
-                tags={post.tags}
+                // tags={post.tags}
               />
             ))}
           </Feed>

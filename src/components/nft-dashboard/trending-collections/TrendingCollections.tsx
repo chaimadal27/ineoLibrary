@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Row } from 'antd';
 import Slider from 'react-slick';
@@ -10,13 +10,14 @@ import { TrendingCollection } from '@app/components/nft-dashboard/trending-colle
 import { useResponsive } from '@app/hooks/useResponsive';
 //import { getTrendingActivities, TrendingActivity } from '@app/api/activity.api';
 import * as S from './TrendingCollections.styles';
-import { WorkshopModel } from '@app/domain/WorkshopModel';
+// import { WorkshopModel } from '@app/domain/WorkshopModel';
 import { useAppSelector } from '@app/hooks/reduxHooks';
+import { Workshop } from '@app/store/slices/workshopSlice';
 
 export const TrendingCollections: React.FC = () => {
   // const [trending, setTrending] = useState<WorkshopModel[]>([]);
 
-  const workshops: WorkshopModel[] = useAppSelector((state)=>state.workshop.workshop)
+  const workshops: Workshop[] = useAppSelector((state)=>state.workshop.workshops)
 
   const { mobileOnly, isTablet: isTabletOrHigher } = useResponsive();
 

@@ -4,9 +4,9 @@ import { Activity } from "@app/store/slices/activitySlice";
 import * as S from "./Explore.styles";
 import { BORDER_RADIUS } from "@app/styles/themes/constants";
 import ReactQuill from "react-quill";
-import { Select, Option } from "@app/components/common/selects/Select/Select";
-import { BaseButtonsForm } from "@app/components/common/forms/BaseButtonsForm/BaseButtonsForm";
-import { Popover } from "@app/components/common/Popover/Popover";
+// import { Select, Option } from "@app/components/common/selects/Select/Select";
+// import { BaseButtonsForm } from "@app/components/common/forms/BaseButtonsForm/BaseButtonsForm";
+// import { Popover } from "@app/components/common/Popover/Popover";
 import { TagDropdown } from "../TagDropdown/TagDropdown";
 import styled from "styled-components";
 
@@ -18,18 +18,18 @@ interface ExploreProps {
 
 export const Explore: React.FC<ExploreProps> = ({ key,activity, add }) => {
   const {
-    id,
+    // id,
     activity_title,
-    activity_method,
-    activity_technique,
+    // activity_method,
+    // activity_technique,
     activity_difficulty,
     activity_duration,
     activity_objectives,
-    activity_needs,
-    activity_organization,
-    activity_variations,
+    // activity_needs,
+    // activity_organization,
+    // activity_variations,
     activity_description,
-    created_at,
+    // created_at,
   } = activity;
   //#2B3467
 
@@ -61,7 +61,7 @@ return (
               }  
             }
           `}</style>
-      <S.CardWrapper style={cardStyle} onClick={add}>
+      <S.CardWrapper style={cardStyle} onClick={add} key={key}>
         <S.CollapseCard bordered={false} defaultActiveKey={["1"]}>
           <S.CardContent
             showArrow={false}

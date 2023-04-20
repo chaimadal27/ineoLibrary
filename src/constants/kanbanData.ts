@@ -1,5 +1,7 @@
+import { WorkshopModel } from '@app/domain/WorkshopModel';
 import { kanbanDifficulty } from './kanbanTags';
 const { high, medium, low } = kanbanDifficulty;
+// import { Workshop } from '@app/api/workshop.api';
 
 
 
@@ -10,6 +12,7 @@ export const kanbanData =
   uses: 'Business Creation',
   target_skills: 'Computer Skills',
   duration: 1,
+  workshop_image: 'string',
   workshop_method: 'Online',
   workshop_description: 'string',
   lanes: [

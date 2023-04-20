@@ -9,9 +9,14 @@ Django==4.1.6
 django-cors-headers==3.13.0
 django-multiselectfield==0.1.12
 django-multiupload==0.6.1
+django-quill==0.1.0
+django-quill-editor==0.1.40
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 drf-yasg==1.21.4
+gevent==22.10.2
+greenlet==2.0.2
+gunicorn==20.1.0
 idna==3.4
 inflection==0.5.1
 itypes==1.2.0
@@ -34,3 +39,6 @@ sqlparse==0.4.3
 tomli==2.0.1
 uritemplate==4.1.1
 urllib3==1.26.14
+uWSGI==2.0.21
+zope.event==4.6
+zope.interface==6.0

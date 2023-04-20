@@ -63,7 +63,7 @@ class Activity(Timestampable, Authorable):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     activity_title = models.TextField(null=True)
     activity_method = models.CharField(
-        max_length=100, choices=ACTIVITY_METHOD, default='Presential')
+        max_length=200, choices=ACTIVITY_METHOD, default='Presential')
     activity_technique = ArrayField(
         models.CharField(max_length=100), blank=True, null=True)
     activity_difficulty = models.JSONField()

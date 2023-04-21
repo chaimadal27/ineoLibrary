@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 
 volumes:
   local_postgres_data: {}
@@ -37,7 +37,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '80:80'
+    networks:
+      - appstore-net
+    external_links:
+      - appstore-bl-server-production
     depends_on:
       - django
   # database management
@@ -47,7 +51,10 @@ services:
       - '8080:8080'
     depends_on:
       - gu_db
-
+# external network
+networks:
+  appstore-net:
+    external: true
   # nginx:
   #   build:
   #     context: ./.nginx

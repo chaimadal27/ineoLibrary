@@ -5,6 +5,7 @@ const CracoAlias = require('craco-alias');
 
 process.env.BROWSER = 'none';
 
+
 module.exports = {
   webpack: {
     plugins: [

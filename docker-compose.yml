@@ -2,6 +2,8 @@ version: '3.5'
 
 volumes:
   local_postgres_data: {}
+  media_volume: {}
+
 
 services:
   # database
@@ -27,6 +29,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./server/src:/app/src
+      - media_volume:/var/www/media/
     ports:
       - '8000:8000'
     depends_on:
@@ -38,10 +41,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - '80:80'
-    networks:
-      - appstore-net
-    external_links:
-      - appstore-bl-server-production
     depends_on:
       - django
   # database management
@@ -51,18 +50,3 @@ services:
       - '8080:8080'
     depends_on:
       - gu_db
-# external network
-networks:
-  appstore-net:
-    external: true
-  # nginx:
-  #   build:
-  #     context: ./.nginx
-  #     dockerfile: Dockerfile
-  #   # volumes:
-  #   #   - .:/app
-  #   # ports:
-  #   #   - '3050:80'
-  #   depends_on:
-  #     - react
-  #     - django

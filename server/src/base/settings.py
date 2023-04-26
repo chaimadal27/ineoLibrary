@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,6 +80,12 @@ DATABASES = {
         'HOST': 'gu_db',
         'PORT': '5432',
         # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'kiki',
+        # 'USER': 'imaginos',
+        # 'PASSWORD': 'ca',
+        # 'HOST': 'gu_db',
+        # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': os.getenv('DB_NAME'),
         # 'HOST': os.getenv('DB_HOST'),
         # 'PORT': os.getenv('DB_PORT'),
@@ -117,7 +123,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ADDITIONS
 AUTH_USER_MODEL = 'user.User'
-CORS_ALLOW_ALL_ORIGINS = True
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -167,7 +173,6 @@ SWAGGER_SETTINGS = {
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'media')
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+MEDIA_ROOT = '/var/www/media'
+STATIC_ROOT = '/home/imaginos/static'
+CORS_ALLOW_ALL_ORIGINS = True

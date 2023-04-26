@@ -40,10 +40,14 @@ class Workshop(Timestampable, Authorable, Sharable):
     duration = models.PositiveIntegerField(null=True)
     workshop_method = models.CharField(
         max_length=100, choices=METHOD, default='Online', null=True)
-    workshop_image = models.ImageField(upload_to="workshopimages/", null=True)
+    workshop_image = models.ImageField(
+        upload_to="workshopattachements/", null=True)
     workshop_description = models.TextField(null=True)
     workshop_attachements = models.FileField(
         upload_to="workshopattachements/", null=True)
+
+
+# workshopimages
 
     class Meta:
         permissions = [

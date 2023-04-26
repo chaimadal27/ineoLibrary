@@ -1,6 +1,3 @@
 node_modules
 .github
 .husky
-docker-entrypoint-initdb.d
-server
-# build

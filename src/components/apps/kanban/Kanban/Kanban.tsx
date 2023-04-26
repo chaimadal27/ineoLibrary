@@ -24,7 +24,7 @@ import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/int
 import { UploadChangeParam } from "antd/es/upload";
 import { httpApi } from "@app/api/http.api";
 import TextArea from 'antd/lib/input/TextArea';
-
+import { route } from "@app/route"
 // import { kanbanDifficulty } from "@app/constants/kanbanTags";
 // const { high, medium, low } = kanbanDifficulty;
 // interface WorkshopProps {
@@ -222,11 +222,11 @@ export const Kanban: React.FC = () => {
     };
     console.log(workshopImageData)
     httpApi
-      .post("http://localhost:8000/workshop/create/lanes/", workshop)
+      .post(`${route}/workshop/create/lanes/`, workshop)
       .then((resp) => {
         httpApi
           .patch(
-            `http://localhost:8000/workshop/${resp.data.id}/update/image/`,
+            `${route}/workshop/${resp.data.id}/update/image/`,
             workshopImageData,
             { headers: { "Content-Type": "multipart/form-data" } }
           )

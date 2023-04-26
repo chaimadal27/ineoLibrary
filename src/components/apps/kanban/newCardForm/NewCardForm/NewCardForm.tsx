@@ -28,6 +28,8 @@ import { httpApi } from "@app/api/http.api";
 import { Activity } from "@app/store/slices/activitySlice";
 import { Explore } from "./Explore";
 import styled from "styled-components";
+import { route } from "@app/route"
+
 // import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 // import { UploadChangeParam } from "antd/es/upload";
 // import { Values } from "@app/components/common/charts/Legend/Legend.styles";
@@ -184,7 +186,7 @@ export const NewCardForm: React.FC<NewCardFormProps> = ({ onAdd, onCancel }) => 
   
 
   useEffect(()=>{
-    httpApi.get('http://localhost:8000/activity/')
+    httpApi.get(`${route}/activity/`)
     .then((resp)=>{
       setActivities(resp.data);
     })

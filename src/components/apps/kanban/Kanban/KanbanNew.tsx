@@ -24,7 +24,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 import { UploadChangeParam } from "antd/es/upload";
 import { httpApi } from "@app/api/http.api";
-
+import { route } from "@app/route"
 import * as S from "./Kanban.styles";
 
 interface LaneType {
@@ -152,13 +152,13 @@ export const KanbanNew: React.FC = () => {
     
     httpApi
       .patch(
-        `http://localhost:8000/workshop/${workshop.id}/update/lanes/`,
+        `${route}/workshop/${workshop.id}/update/lanes/`,
         workshop
       )
       .then((resp) => {
         httpApi
           .patch(
-            `http://localhost:8000/workshop/${resp.data.id}/update/image/`,
+            `${route}/workshop/${resp.data.id}/update/image/`,
             workshopImageData,
             { headers: { "Content-Type": "multipart/form-data" } }
           )

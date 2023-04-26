@@ -22,6 +22,7 @@ import { InputNumber } from '@app/components/common/inputs/InputNumber/InputNumb
 import { toolbarOptions } from '../newCardForm/NewCardForm/NewCardForm';
 import { httpApi } from '@app/api/http.api';
 import { notificationController } from '@app/controllers/notificationController';
+import { route } from "@app/route"
 
 interface CardProps {
   style: CSSStyleSheet;
@@ -109,7 +110,7 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const onDeleteCard = (id:number | string | undefined) => {
-    httpApi.delete(`http://localhost:8000/activity/${id}/`)
+    httpApi.delete(`${route}/activity/${id}/`)
     .then(()=>{
       notificationController.success({message:'Activity deleted successfully'})
       onDelete();

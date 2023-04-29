@@ -1,0 +1,6 @@
+echo "SECRET_KEY=django-insecure-6xz6mqr5$f@2jn7t9^w3nq&vh@1fj0mnyeutrpj+q20kqn367x
+DB_NAME=kiki
+DB_HOST=gu_db
+DB_PORT=5432
+DB_USER=imaginos
+DB_PASSWORD=ca" > server/.env

@@ -20,7 +20,7 @@ services:
       POSTGRES_DB: kiki
       POSTGRES_USER: imaginos
       POSTGRES_PASSWORD: ca
-    expose:
+    ports:
       - '5432:5432'
   # backend
   django:

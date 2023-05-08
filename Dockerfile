@@ -1,7 +1,7 @@
 FROM node:19.8 as builder
 WORKDIR /app
 COPY . .
-RUN yarn install 
+# RUN yarn install 
 
 
 FROM nginx

@@ -8,8 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 # TODO: change allowed hosts
-SECRET_KEY = os.getenv('SECRET_KEY')
-
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = "@e@e$#eo1gc)zr8wzg%)-0(xmtg#&l11_%269xwngqm9x$9hi7"
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
@@ -77,7 +77,7 @@ DATABASES = {
         'NAME': 'kiki',
         'USER': 'imaginos',
         'PASSWORD': 'ca',
-        'HOST': 'gu_db',
+        'HOST': 'localhost',
         'PORT': '5432',
         # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'kiki',

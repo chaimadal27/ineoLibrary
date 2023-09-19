@@ -4,7 +4,7 @@ import { ApiError } from '@app/api/ApiError';
 import { readToken } from '@app/services/localStorage.service';
 
 export const httpApi = axios.create({
-  baseURL: 'http://162.19.153.94:8000/',
+  baseURL: 'http://localhost:8000/',
 });
 
 httpApi.interceptors.request.use(

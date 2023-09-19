@@ -27,10 +27,10 @@ export interface ActivityTechnique {
 
 
 export const getActivities = async ():Promise<Activity[]> => {
-    const response = await httpApi.get('http://162.19.153.94:8000/activity')
+    const response = await httpApi.get('http://localhost:8000/activity')
     const data = await response.data
     return data
 }
 
 export const destroyActivity = async():Promise<null> => 
-    httpApi.delete('http://162.19.153.94:/8000/activity/')
+    httpApi.delete('http://localhost:/8000/activity/')

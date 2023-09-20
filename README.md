@@ -51,3 +51,27 @@ git add .
 git commit -m '.'
 git push -u origin HEAD
 ``` 
+
+#### Screenshots:
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-00-57.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-01-22.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-01-36.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-01-49.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-02-10.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-02-18.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-02-28.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-02-36.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-02-44.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-03-03.png)
+
+![Alt Text](./screenshots/Screenshot%from%2023-09-20%00-03-34.png)

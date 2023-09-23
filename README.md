@@ -54,14 +54,5 @@ git push -u origin HEAD
 
 #### Screenshots:
 
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-00-57.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-01-22.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-01-36.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-01-49.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-02-10.png" alt="screenshot"/>
 <img src="./.github/screenshots/Screenshot from 2023-09-20 00-02-18.png" alt="screenshot"/>
 <img src="./.github/screenshots/Screenshot from 2023-09-20 00-02-28.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-02-36.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-02-44.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-03-03.png" alt="screenshot"/>
-<img src="./.github/screenshots/Screenshot from 2023-09-20 00-03-34.png" alt="screenshot"/>
